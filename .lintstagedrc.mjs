@@ -1,3 +1,3 @@
 export default {
-  "*.{js,jsx,ts,tsx,json,css,md}": ["biome check --write --no-errors-on-unmatched"],
+  "*.{js,jsx,ts,tsx,json,css,md}": ["npm run format", "npm run lint"],
 };
