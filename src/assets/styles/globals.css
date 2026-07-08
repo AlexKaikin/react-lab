@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "./_themes.css";
+@import "./_typography.css";
+
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: 16px;
+}

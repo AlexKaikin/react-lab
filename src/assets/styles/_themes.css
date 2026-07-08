@@ -1,0 +1,91 @@
+:root {
+  --radius: 10px;
+
+  /* Фоновые слои (от нижнего к верхнему) */
+  --bg-primary: var(--color-neutral-50); /* Основной блок/карточка */
+  --bg-secondary: var(--color-neutral-100); /* Вложенный элемент (инпут, плашка) */
+
+  /* Границы и разделители */
+  --border-primary: var(--color-neutral-200); /* Стандартная обводка */
+  --border-secondary: var(--color-neutral-300); /* Акцентная обводка или фокус */
+
+  /* Текст (по важности) */
+  --text-primary: var(--color-neutral-950); /* Заголовки и основной текст */
+  --text-secondary: var(--color-neutral-600); /* Подписи, пояснения */
+
+  /* Специфические элементы */
+  --skeleton-bg: var(--color-neutral-100);
+
+  /* Тени */
+  --shadow-primary: 0 0 20px 20px rgb(0 0 0 / 0.04);
+  --shadow-secondary: 0 0 10px 10px rgb(0 0 0 / 0.06);
+}
+
+[data-theme="dark"] {
+  /* Фоновые слои (инверсия) */
+  --bg-primary: var(--color-neutral-950); /* Темно-серые карточки */
+  --bg-secondary: var(--color-neutral-900); /* Вложенные элементы */
+
+  /* Границы (инверсия) */
+  --border-primary: var(--color-neutral-900);
+  --border-secondary: var(--color-neutral-800);
+
+  /* Текст (инверсия) */
+  --text-primary: var(--color-neutral-50);
+  --text-secondary: var(--color-neutral-400);
+
+  /* Специфические элементы */
+  --skeleton-bg: var(--color-neutral-900);
+
+  /* Тени */
+  --shadow-primary: 0 0 10px 10px rgba(255, 255, 255, 0.02);
+  --shadow-secondary: 0 0 10px 10px rgba(255, 255, 255, 0.04);
+}
+
+@theme inline {
+  /* Цвета ФОНА (классы bg-primary, bg-secondary...) */
+  --background-color-primary: var(--bg-primary);
+  --background-color-secondary: var(--bg-secondary);
+
+  /* Цвета ТЕКСТА (классы text-primary, text-secondary...) */
+  --text-color-primary: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+
+  /* Цвета ГРАНИЦ (классы border-primary, border-secondary...) */
+  --border-color-primary: var(--border-primary);
+  --border-color-secondary: var(--border-secondary);
+
+  /* Специфические элементы */
+  --color-skeleton: var(--skeleton-bg);
+
+  /* Тени */
+  --shadow-primary: var(--shadow-primary);
+  --shadow-secondary: var(--shadow-secondary);
+
+  --radius-sm: calc(var(--radius) / 2);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 2);
+}
+
+@layer utilities {
+  .container {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
