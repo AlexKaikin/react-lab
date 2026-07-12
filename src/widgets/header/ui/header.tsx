@@ -5,7 +5,7 @@ import { Icon } from '@/shared/ui/icon'
 export const Header: FC<ComponentProps<'div'>> = ({ className }) => {
   return (
     <header className={classNames('container flex items-center gap-6', className)}>
-      <div className="flex-1 uppercase font-bold">react lab</div>
+      <div className="flex-1 flex items-center uppercase font-bold">react lab</div>
       <div>
         <Icon name="Search" />
       </div>
