@@ -1,23 +1,26 @@
 import type { ComponentProps, FC } from 'react'
+import { SearchButton } from '@/features/search-button'
 import { classNames } from '@/shared/lib/classNames'
+import { Button } from '@/shared/ui'
 import { Icon } from '@/shared/ui/icon'
 
 export const Header: FC<ComponentProps<'div'>> = ({ className }) => {
   return (
-    <header className={classNames('container flex items-center gap-6', className)}>
-      <div className="flex-1 flex items-center uppercase font-bold">react lab</div>
-      <div>
-        <Icon name="Search" />
+    <header className={classNames('container flex items-center', className)}>
+      <div className="flex-1 flex items-center gap-2 uppercase font-bold">
+        <Icon name="Menu" />
+        react lab
       </div>
-      <div>
+      <SearchButton />
+      <Button>
         <Icon name="Globe" />
-      </div>
-      <div>
+      </Button>
+      <Button>
         <Icon name="Sun" />
-      </div>
-      <div>
+      </Button>
+      <Button className="pr-0">
         <Icon name="User" />
-      </div>
+      </Button>
     </header>
   )
 }

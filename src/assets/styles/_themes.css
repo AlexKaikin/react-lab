@@ -1,6 +1,14 @@
 :root {
   --radius: 10px;
 
+  /* Семантические цвета */
+  --semantic-primary: #3b82f6; /* blue-500 */
+  --semantic-secondary: #6b7280; /* gray-500 */
+  --semantic-info: #3b82f6; /* blue-500 */
+  --semantic-error: #ef4444; /* red-500 */
+  --semantic-warning: #eab308; /* yellow-500 */
+  --semantic-success: #22c55e; /* green-500 */
+
   /* Фоновые слои (от нижнего к верхнему) */
   --bg-primary: var(--color-neutral-50); /* Основной блок/карточка */
   --bg-secondary: var(--color-neutral-100); /* Вложенный элемент (инпут, плашка) */
@@ -43,6 +51,14 @@
 }
 
 @theme inline {
+  /* Семантические цвета */
+  --color-semantic-primary: var(--semantic-primary); /* ← Добавь эту строку */
+  --color-semantic-secondary: var(--semantic-secondary);
+  --color-semantic-info: var(--semantic-info);
+  --color-semantic-error: var(--semantic-error);
+  --color-semantic-warning: var(--semantic-warning);
+  --color-semantic-success: var(--semantic-success);
+
   /* Цвета ФОНА (классы bg-primary, bg-secondary...) */
   --background-color-primary: var(--bg-primary);
   --background-color-secondary: var(--bg-secondary);
