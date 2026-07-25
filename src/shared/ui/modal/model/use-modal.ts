@@ -1,8 +1,8 @@
 'use client'
 
-import { createElement, type ReactNode } from 'react'
+import { createElement, type FC, type ReactNode } from 'react'
 import { create } from 'zustand'
-import type { OpenModalParams } from './types'
+import type { ModalContentProps, OpenModalParams } from './types'
 
 type ModalItem = {
   id: string
@@ -11,27 +11,27 @@ type ModalItem = {
 
 type ModalStore = {
   modalItems: ModalItem[]
-  openModal: (params: OpenModalParams) => void
-  closeModal: () => void
+  openModal: <P extends ModalContentProps>(params: OpenModalParams<P>) => void
+  closeModal: (id: string) => void
 }
 
-export const useModal = create<ModalStore>()((set) => ({
+export const useModal = create<ModalStore>()((set, get) => ({
   modalItems: [],
 
-  openModal: (params: OpenModalParams) => {
+  openModal: (params) => {
     const id = params.id || Math.random().toString(36).slice(2, 11)
 
     const render: ModalItem['render'] = () => {
-      const Comp = params.component as React.ComponentType<{ onClose: () => void }>
+      const Comp = params.component as unknown as FC<ModalContentProps>
 
       return createElement(Comp, {
-        ...(params.props as Record<string, unknown>),
-        onClose: () => set((state) => ({ modalItems: state.modalItems.slice(0, -1) })),
+        ...('props' in params ? params.props : {}),
+        onClose: () => get().closeModal(id),
       })
     }
 
     set((state) => ({ modalItems: [...state.modalItems, { id, render }] }))
   },
 
-  closeModal: () => set((state) => ({ modalItems: state.modalItems.slice(0, -1) })),
+  closeModal: (id) => set((state) => ({ modalItems: state.modalItems.filter((item) => item.id !== id) })),
 }))

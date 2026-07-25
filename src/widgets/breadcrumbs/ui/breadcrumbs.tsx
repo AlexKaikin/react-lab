@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import type { FC } from 'react'
 
 export type BreadcrumbItem = {
@@ -9,9 +10,11 @@ type BreadcrumbsProps = {
   items: BreadcrumbItem[]
 }
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
+export const Breadcrumbs: FC<BreadcrumbsProps> = async ({ items }) => {
+  const t = await getTranslations('shared.breadcrumbs')
+
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label={t('label')}>
       <ol className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
         {items.map((item, index) => {
           const isLast = index === items.length - 1

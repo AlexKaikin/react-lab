@@ -1,8 +1,10 @@
-import type { ComponentType, FC, LazyExoticComponent } from 'react'
+import type { FC, LazyExoticComponent } from 'react'
 import type { ModalProps } from '../ui/modal'
 
-export type OpenModalParams = {
+export type ModalContentProps = Omit<ModalProps, 'children'> & { onClose: () => void }
+type ExtraProps<P> = Omit<P, keyof ModalContentProps>
+
+export type OpenModalParams<P extends ModalContentProps = ModalContentProps> = {
   id?: string
-  component: ComponentType<{ onClose: () => void }> | LazyExoticComponent<FC<ModalProps>>
-  props?: Record<string, unknown>
-}
+  component: LazyExoticComponent<FC<P>>
+} & (keyof ExtraProps<P> extends never ? { props?: never } : { props: ExtraProps<P> })

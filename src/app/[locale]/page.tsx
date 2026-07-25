@@ -1,7 +1,8 @@
 import { getTranslations } from 'next-intl/server'
-import { Home } from '@/pages/home'
+import type { LocalePageProps } from '@/shared/config/i18n/types'
+import { Home } from '@/views/home'
 
-export async function generateMetadata({ params }: PageProps<'/[locale]'>) {
+export async function generateMetadata({ params }: LocalePageProps<'/[locale]'>) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'shared.home.meta' })
 
