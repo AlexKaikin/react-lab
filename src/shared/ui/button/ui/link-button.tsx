@@ -1,6 +1,6 @@
 import type { ComponentProps, FC } from 'react'
-import { Link } from '@/shared/config/i18n/navigation'
 import { classNames } from '@/shared/lib/classNames'
+import { Link } from '@/shared/lib/i18n/navigation'
 import { getButtonStyle } from '../lib'
 import type { TButton } from '../model/schema'
 

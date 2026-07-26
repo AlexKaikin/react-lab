@@ -1,37 +1,86 @@
-'use client'
+import { useCallback, useEffect, useRef } from 'react'
+import { useModalStore } from '@/shared/ui/modal/model/use-modal-store'
+import { type Animation, useAnimation } from './use-animation'
 
-import { createElement, type FC, type ReactNode } from 'react'
-import { create } from 'zustand'
-import type { ModalContentProps, OpenModalParams } from './types'
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-type ModalItem = {
-  id: string
-  render: () => ReactNode
+type Props = {
+  animation?: Animation
 }
 
-type ModalStore = {
-  modalItems: ModalItem[]
-  openModal: <P extends ModalContentProps>(params: OpenModalParams<P>) => void
-  closeModal: (id: string) => void
-}
+export const useModal = ({ animation }: Props) => {
+  const isClosingRef = useRef(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const { isAnimating, setIsAnimating, animationClassName } = useAnimation(animation)
+  const shouldClose = useModalStore((state) => state.isClosing)
+  const cleaningModalItems = useModalStore((state) => state.cleaningModalItems)
 
-export const useModal = create<ModalStore>()((set, get) => ({
-  modalItems: [],
+  const handleClose = useCallback(() => {
+    if (isClosingRef.current) return
+    isClosingRef.current = true
+    setIsAnimating(true)
+  }, [setIsAnimating])
 
-  openModal: (params) => {
-    const id = params.id || Math.random().toString(36).slice(2, 11)
+  const handleTransitionEnd = useCallback(
+    (e: React.TransitionEvent) => {
+      if (e.target === e.currentTarget && isClosingRef.current) {
+        cleaningModalItems()
+      }
+    },
+    [cleaningModalItems],
+  )
 
-    const render: ModalItem['render'] = () => {
-      const Comp = params.component as unknown as FC<ModalContentProps>
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose()
+        return
+      }
 
-      return createElement(Comp, {
-        ...('props' in params ? params.props : {}),
-        onClose: () => get().closeModal(id),
-      })
+      if (e.key !== 'Tab' || !dialogRef.current) return
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    },
+    [handleClose],
+  )
+
+  useEffect(() => {
+    if (shouldClose) handleClose()
+  }, [shouldClose, handleClose])
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    dialogRef.current?.focus()
+
+    requestAnimationFrame(() => setIsAnimating(false))
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+      previouslyFocused?.focus()
     }
+  }, [handleKeyDown, setIsAnimating])
 
-    set((state) => ({ modalItems: [...state.modalItems, { id, render }] }))
-  },
-
-  closeModal: (id) => set((state) => ({ modalItems: state.modalItems.filter((item) => item.id !== id) })),
-}))
+  return {
+    dialogRef,
+    handleClose,
+    handleTransitionEnd,
+    animating: { isAnimating, animationClassName },
+  }
+}

@@ -1,12 +1,8 @@
 'use client'
 
-import { useModal } from '../model/use-modal'
+import { useModalStore } from '../model/use-modal-store'
 
 export const ModalProvider = () => {
-  const { modalItems } = useModal()
-  const current = modalItems[modalItems.length - 1]
-
-  if (!current) return null
-
-  return current.render()
+  const { modalItems } = useModalStore()
+  return modalItems[modalItems.length - 1] ?? null
 }

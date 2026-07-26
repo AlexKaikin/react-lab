@@ -1,11 +1,9 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Modal, type ModalContentProps } from '@/shared/ui/modal'
+import { Modal } from '@/shared/ui/modal'
 
-export type SearchModalProps = ModalContentProps
-
-export const SearchModal: React.FC<SearchModalProps> = (props) => {
+export const SearchModal: React.FC = () => {
   const t = useTranslations('shared.search')
 
   return (
@@ -14,7 +12,6 @@ export const SearchModal: React.FC<SearchModalProps> = (props) => {
       animation="slideDown"
       position="top"
       aria-label={t('label')}
-      {...props}
     >
       Search
     </Modal>

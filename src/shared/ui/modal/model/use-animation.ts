@@ -1,4 +1,6 @@
-import type { ComponentProps, ReactNode } from 'react'
+'use client'
+
+import { useState } from 'react'
 import { classNames } from '@/shared/lib/classNames'
 
 export type Animation = 'fade' | 'slideRight' | 'slideUp' | 'slideDown' | 'slideLeft' | 'scale' | 'none'
@@ -16,19 +18,9 @@ const ANIMATION_CLASSES = (animation: Animation, isAnimating: boolean): string =
   return ''
 }
 
-type Props = ComponentProps<'div'> & {
-  animation?: Animation
-  isAnimating: boolean
-  children: ReactNode
-  className?: string
-}
+export const useAnimation = (animation: Animation = 'fade') => {
+  const [isAnimating, setIsAnimating] = useState(true)
+  const animationClassName = classNames(BASE, ANIMATION_CLASSES(animation, isAnimating))
 
-export const Animation: React.FC<Props> = (props) => {
-  const { animation = 'fade', isAnimating, children, className, ...rest } = props
-
-  return (
-    <div className={classNames(BASE, ANIMATION_CLASSES(animation, isAnimating), className)} {...rest}>
-      {children}
-    </div>
-  )
+  return { isAnimating, setIsAnimating, animationClassName }
 }

@@ -1,5 +1,5 @@
 import proxy from 'next-intl/middleware'
-import { routing } from '@/shared/config/i18n'
+import { routing } from '@/shared/lib/i18n'
 
 export default proxy(routing)
 

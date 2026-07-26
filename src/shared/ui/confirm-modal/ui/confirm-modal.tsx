@@ -1,9 +1,8 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
 import { Button } from '@/shared/ui/button'
-import { Modal, type ModalContentProps } from '@/shared/ui/modal'
+import { Modal, type ModalContentProps, useModalStore } from '@/shared/ui/modal'
 
 type ConfirmModalProps = ModalContentProps & {
   cb: () => void
@@ -11,18 +10,17 @@ type ConfirmModalProps = ModalContentProps & {
 
 export const ConfirmModal: React.FC<ConfirmModalProps> = ({ cb, ...restProps }) => {
   const t = useTranslations('shared.confirm')
-  const [shouldClose, setShouldClose] = useState(false)
+  const closeModal = useModalStore((state) => state.closeModal)
 
   const handleConfirm = () => {
     cb()
-    setShouldClose(true)
+    closeModal()
   }
 
   return (
     <Modal
       aria-label={t('label')}
       className="flex flex-col bg-secondary w-70 rounded-md p-8 items-center"
-      shouldClose={shouldClose}
       {...restProps}
     >
       {t('question')}

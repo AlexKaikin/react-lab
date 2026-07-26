@@ -2,42 +2,40 @@
 
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { LinkButton } from '@/shared/ui'
-import { Modal, type ModalContentProps } from '@/shared/ui/modal'
-
-export type MenuModalProps = ModalContentProps
+import { Modal, useModalStore } from '@/shared/ui/modal'
 
 const menu = [
   { key: 'home', href: '/' },
   { key: 'blog', href: '/blog' },
 ] as const
 
-export const MenuModal: React.FC<MenuModalProps> = (props) => {
+export const MenuModal: React.FC = () => {
   const pathname = usePathname()
   const prevPathname = useRef(pathname)
-  const [shouldClose, setShouldClose] = useState(false)
   const t = useTranslations('shared.menu')
+  const closeModal = useModalStore((state) => state.closeModal)
 
   useEffect(() => {
-    if (prevPathname.current !== pathname) setShouldClose(true)
+    if (prevPathname.current !== pathname) closeModal()
     prevPathname.current = pathname
-  }, [pathname])
+  }, [pathname, closeModal])
 
   return (
     <Modal
-      className="left-2 flex flex-col bg-secondary w-70 h-full rounded-md p-8 items-center"
+      className="my-2 mx-2 self-stretch bg-secondary w-70 rounded-md p-4"
       animation="slideLeft"
       position="left"
-      shouldClose={shouldClose}
       aria-label={t('label')}
-      {...props}
     >
-      {menu.map((item) => (
-        <LinkButton key={item.key} href={item.href}>
-          {t(item.key)}
-        </LinkButton>
-      ))}
+      <div className="flex flex-col">
+        {menu.map((item) => (
+          <LinkButton key={item.key} href={item.href} className="w-fit">
+            {t(item.key)}
+          </LinkButton>
+        ))}
+      </div>
     </Modal>
   )
 }

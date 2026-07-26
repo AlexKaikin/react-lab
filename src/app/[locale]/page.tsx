@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import type { LocalePageProps } from '@/shared/config/i18n/types'
+import type { LocalePageProps } from '@/shared/lib/i18n/types'
 import { Home } from '@/views/home'
 
 export async function generateMetadata({ params }: LocalePageProps<'/[locale]'>) {
