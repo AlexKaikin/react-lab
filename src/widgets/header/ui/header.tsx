@@ -1,11 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import type { ComponentProps, FC } from 'react'
+import { LanguageToggle } from '@/features/language-toggle'
 import { MenuButton } from '@/features/menu-button'
 import { ProfileButton } from '@/features/profile-button'
 import { SearchButton } from '@/features/search-button'
+import { ThemeToggle } from '@/features/theme'
 import { classNames } from '@/shared/lib/classNames'
-import { Button } from '@/shared/ui'
-import { Icon } from '@/shared/ui/icon'
 
 export const Header: FC<ComponentProps<'div'>> = async ({ className }) => {
   const t = await getTranslations('shared.header')
@@ -17,12 +17,8 @@ export const Header: FC<ComponentProps<'div'>> = async ({ className }) => {
         {t('title')}
       </div>
       <SearchButton />
-      <Button>
-        <Icon name="Globe" />
-      </Button>
-      <Button>
-        <Icon name="Sun" />
-      </Button>
+      <LanguageToggle />
+      <ThemeToggle />
       <ProfileButton />
     </header>
   )

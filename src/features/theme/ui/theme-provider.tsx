@@ -1,7 +1,8 @@
 'use client'
 
+import Script from 'next/script'
 import { type ReactNode, useEffect } from 'react'
-import { THEMES } from '../model/constants'
+import { THEME, THEMES } from '../model/constants'
 import type { Theme } from '../model/types'
 import { useTheme } from '../model/use-theme'
 
@@ -9,13 +10,15 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const { setTheme } = useTheme()
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme') as Theme
-    if (theme && THEMES.includes(theme)) setTheme(theme)
+    const stored = localStorage.getItem('theme') as Theme
+    setTheme(THEMES.includes(stored) ? stored : THEME.DARK)
   }, [setTheme])
 
   return (
     <>
-      <script
+      <Script
+        id="theme-init"
+        strategy="beforeInteractive"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: ignore
         dangerouslySetInnerHTML={{
           __html: `

@@ -33,5 +33,11 @@
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",
     "retry": "Retry"
+  },
+  "themeToggle": {
+    "label": "Toggle theme"
+  },
+  "languageToggle": {
+    "label": "Switch language"
   }
 }
