@@ -1,6 +1,5 @@
 'use client'
 
-import Script from 'next/script'
 import { type ReactNode, useEffect } from 'react'
 import { THEME, THEMES } from '../model/constants'
 import type { Theme } from '../model/types'
@@ -16,9 +15,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   return (
     <>
-      <Script
-        id="theme-init"
-        strategy="beforeInteractive"
+      <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: ignore
         dangerouslySetInnerHTML={{
           __html: `

@@ -1,10 +1,9 @@
-import '@/assets/styles/globals.css'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
-import { fontText } from '@/assets/fonts'
 import { ThemeProvider } from '@/features/theme'
 import { locales } from '@/shared/lib/i18n'
+import { HtmlLayout } from '@/shared/ui/html-layout'
 import { ModalProvider } from '@/shared/ui/modal'
 import { Header } from '@/widgets/header'
 
@@ -22,16 +21,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${fontText.variable} h-full`} suppressHydrationWarning>
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>
-            <Header className="py-4" />
-            <main className="grow relative bg-primary rounded-md py-4">{children}</main>
-            <ModalProvider />
-          </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <HtmlLayout lang={locale}>
+      <ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <Header className="py-4" />
+          <main className="grow relative bg-primary py-4">{children}</main>
+          <ModalProvider />
+        </NextIntlClientProvider>
+      </ThemeProvider>
+    </HtmlLayout>
   )
 }
