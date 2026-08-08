@@ -1,0 +1,11 @@
+type Env = 'DATABASE_URL'
+
+export const env = (name: Env): string => {
+  const value = process.env[name]
+
+  if (value === undefined || value === '') {
+    throw new Error(`Missing required environment variable: ${name}`)
+  }
+
+  return value
+}

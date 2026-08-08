@@ -18,7 +18,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
 
   openModal: (params) => {
     const Comp = params.component as unknown as FC<ModalContentProps>
-    const element = createElement(Comp, { ...('props' in params ? params.props : {}) } as ModalContentProps) // <- создаём сразу, не оборачиваем в функцию
+    const element = createElement(Comp, { ...('props' in params ? params.props : {}) } as ModalContentProps)
 
     set((state) => ({ modalItems: [...state.modalItems, element] }))
   },

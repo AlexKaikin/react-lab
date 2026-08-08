@@ -28,12 +28,12 @@ const VARIANT_COLOR_STYLE: Record<TButtonVariant, Record<TButtonColor, string>> 
     success: 'bg-semantic-success text-white',
   },
   outlined: {
-    primary: 'border border-semantic-primary text-semantic-primary',
-    secondary: 'border border-semantic-secondary text-semantic-secondary',
-    info: 'border border-semantic-info text-semantic-info',
-    error: 'border border-semantic-error text-semantic-error',
-    warning: 'border border-semantic-warning text-semantic-warning',
-    success: 'border border-semantic-success text-semantic-success',
+    primary: 'text-semantic-primary',
+    secondary: 'text-semantic-secondary',
+    info: 'text-semantic-info',
+    error: 'text-semantic-error',
+    warning: 'text-semantic-warning',
+    success: 'text-semantic-success',
   },
   text: {
     primary: 'text-semantic-primary',
@@ -54,9 +54,10 @@ type TGetButtonStyle = {
 
 export const getButtonStyle = ({ variant = 'contained', size = 'medium', color, shape }: TGetButtonStyle) => {
   const styles: string[] = [
-    'inline-flex items-center justify-center gap-2 relative cursor-pointer rounded-md transition-colors opacity-80',
+    'inline-flex items-center justify-center gap-2 relative cursor-pointer rounded-md opacity-80 hover:opacity-100 transition-[color,opacity]',
   ]
 
+  if (variant === 'outlined') styles.push('border border-current')
   if (shape === 'square') styles.push(SQUARE_SIZE_STYLE[size])
   if (['contained', 'outlined'].includes(variant) && !shape) styles.push(BUTTON_SIZE_STYLE[size])
   if (color) styles.push(VARIANT_COLOR_STYLE[variant][color])

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { classNames } from '@/shared/lib/classNames'
+import { classNames } from '@/shared/lib/class-names'
 
 export type Animation = 'fade' | 'slideRight' | 'slideUp' | 'slideDown' | 'slideLeft' | 'scale' | 'none'
 

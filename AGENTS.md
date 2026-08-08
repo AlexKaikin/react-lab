@@ -54,6 +54,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | `delete`  | Удаление сущности                | `deleteUser`, `deleteArticle` |
 | `get`     | Получение одной сущности         | `getUser`, `getArticle`       |
 | `getList` | Получение списка сущностей       | `getArticles`, `getUsers`     |
+| `build`   | Формирование объекта/структуры без побочных эффектов (не сущность) | `buildMetadata`, `buildBreadcrumbs` |
 
 ## Подключения
 

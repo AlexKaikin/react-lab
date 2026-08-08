@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { ThemeProvider } from '@/features/theme'
-import { classNames } from '@/shared/lib/classNames'
+import { classNames } from '@/shared/lib/class-names'
 import { defaultLocale } from '@/shared/lib/i18n'
 import { getButtonStyle } from '@/shared/ui/button'
 import { HtmlLayout } from '@/shared/ui/html-layout'

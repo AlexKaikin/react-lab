@@ -1,0 +1,16 @@
+model Post {
+    id        String   @id @default(uuid())
+    slug      String   @unique
+    title     String
+    content   String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    metaId String @unique
+    meta   Meta   @relation(fields: [metaId], references: [id])
+
+    categoryId String
+    category   PostCategory @relation(fields: [categoryId], references: [id])
+
+    tags String[] @default([])
+}

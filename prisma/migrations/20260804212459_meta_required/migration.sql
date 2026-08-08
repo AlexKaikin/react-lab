@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Meta" ALTER COLUMN "title" SET NOT NULL,
+ALTER COLUMN "description" SET NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Post" ALTER COLUMN "metaId" SET NOT NULL;

@@ -2,7 +2,7 @@
 
 import type { FC, ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { classNames } from '@/shared/lib/classNames'
+import { classNames } from '@/shared/lib/class-names'
 import { Button } from '@/shared/ui/button'
 import { Icon } from '@/shared/ui/icon'
 import { getPositionClassName, type Position } from '../lib/get-position-class-name'

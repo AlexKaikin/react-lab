@@ -2,13 +2,16 @@ import { getTranslations } from 'next-intl/server'
 import type { ComponentProps, FC } from 'react'
 import { LanguageToggle } from '@/features/language-toggle'
 import { MenuButton } from '@/features/menu-button'
-import { ProfileButton } from '@/features/profile-button'
+// import { ProfileButton } from '@/features/profile-button'
 import { SearchButton } from '@/features/search-button'
 import { ThemeToggle } from '@/features/theme'
-import { classNames } from '@/shared/lib/classNames'
+import { classNames } from '@/shared/lib/class-names'
+import type { Locale } from '@/shared/lib/i18n'
 
-export const Header: FC<ComponentProps<'div'>> = async ({ className }) => {
-  const t = await getTranslations('shared.header')
+type HeaderProps = ComponentProps<'div'> & { locale: Locale }
+
+export const Header: FC<HeaderProps> = async ({ className, locale }) => {
+  const t = await getTranslations({ locale, namespace: 'shared.header' })
 
   return (
     <header className={classNames('flex items-center', className)}>
@@ -19,7 +22,7 @@ export const Header: FC<ComponentProps<'div'>> = async ({ className }) => {
       <SearchButton />
       <LanguageToggle />
       <ThemeToggle />
-      <ProfileButton />
+      {/* <ProfileButton /> */}
     </header>
   )
 }

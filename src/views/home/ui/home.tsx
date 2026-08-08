@@ -1,9 +1,7 @@
-export const Home = () => {
+export const HomePage = () => {
   return (
-    <div className="container">
+    <div className="container animate-fade-in">
       <div>content</div>
     </div>
   )
 }
-
-export default Home

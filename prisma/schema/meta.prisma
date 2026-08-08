@@ -1,0 +1,8 @@
+model Meta {
+    id          String  @id @default(uuid())
+    title       String
+    description String
+    image       String?
+
+    post Post?
+}

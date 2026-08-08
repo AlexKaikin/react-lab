@@ -24,7 +24,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
     <HtmlLayout lang={locale}>
       <ThemeProvider>
         <NextIntlClientProvider messages={messages}>
-          <Header className="py-4" />
+          <Header className="py-4" locale={locale} />
           <main className="grow relative bg-primary py-4">{children}</main>
           <ModalProvider />
         </NextIntlClientProvider>

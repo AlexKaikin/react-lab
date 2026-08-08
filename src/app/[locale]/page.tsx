@@ -1,17 +1,13 @@
 import { getTranslations } from 'next-intl/server'
+import { buildMetadata } from '@/shared/lib/build-metadata'
 import type { LocalePageProps } from '@/shared/lib/i18n/types'
-import { Home } from '@/views/home'
+import { HomePage } from '@/views/home'
 
 export async function generateMetadata({ params }: LocalePageProps<'/[locale]'>) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'shared.home.meta' })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return buildMetadata({ title: t('title'), description: t('description'), locale })
 }
 
-export default function Page() {
-  return <Home />
-}
+export default HomePage

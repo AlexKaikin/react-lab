@@ -1,5 +1,5 @@
 import type { ComponentProps, FC } from 'react'
-import { classNames } from '@/shared/lib/classNames'
+import { classNames } from '@/shared/lib/class-names'
 import { Icon } from '@/shared/ui/icon'
 import { getButtonStyle } from '../lib'
 import type { TButton } from '../model/schema'
@@ -15,7 +15,6 @@ export const Button: FC<TButton<ComponentProps<'button'>>> = (props) => {
       className={classNames(
         ...getButtonStyle({ size, variant, color, shape }),
         disabled && 'opacity-50 disabled:pointer-events-none',
-        'hover:opacity-100 transition-[color,opacity]',
         className,
       )}
       {...rest}
