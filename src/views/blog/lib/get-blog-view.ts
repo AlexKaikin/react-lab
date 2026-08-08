@@ -11,7 +11,7 @@ type BlogView = {
 
 export const getBlogView = async (params: BlogParams): Promise<BlogView> => {
   if ('category' in params) {
-    const category = await getCategory(params.category)
+    const category = await getCategory(params.category, params.locale)
     if (!category) notFound()
 
     return {

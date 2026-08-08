@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: LocalePageProps<'/[locale]/bl
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'shared.blog.meta' })
 
-  return buildMetadata({ title: t('title'), description: t('description'), locale })
+  return buildMetadata({ title: t('title'), description: t('description'), locale, pathname: '/blog' })
 }
 
 export default BlogPage

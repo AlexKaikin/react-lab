@@ -1,4 +1,4 @@
-type Env = 'DATABASE_URL'
+type Env = 'DATABASE_URL' | 'NEXT_PUBLIC_SITE_URL'
 
 export const env = (name: Env): string => {
   const value = process.env[name]

@@ -1,3 +1,8 @@
+enum Locale {
+    ru
+    en
+}
+
 model Post {
     id        String   @id @default(uuid())
     slug      String   @unique
@@ -5,6 +10,7 @@ model Post {
     content   String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    tags      String[] @default([])
 
     metaId String @unique
     meta   Meta   @relation(fields: [metaId], references: [id])
@@ -12,5 +18,21 @@ model Post {
     categoryId String
     category   PostCategory @relation(fields: [categoryId], references: [id])
 
-    tags String[] @default([])
+    translations PostTranslation[]
+}
+
+model PostTranslation {
+    id      String   @id @default(uuid())
+    locale  Locale
+    title   String
+    content String
+    tags    String[] @default([])
+
+    metaId String @unique
+    meta   Meta   @relation(fields: [metaId], references: [id])
+
+    postId String
+    post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@unique([postId, locale])
 }

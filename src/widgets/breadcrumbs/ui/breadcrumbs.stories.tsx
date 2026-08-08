@@ -13,6 +13,7 @@ type Story = StoryObj<typeof Breadcrumbs>
 export const Default: Story = {
   args: {
     label: 'Breadcrumb',
+    locale: 'en',
     items: [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: 'Article' }],
   },
 }
@@ -20,6 +21,7 @@ export const Default: Story = {
 export const TwoItems: Story = {
   args: {
     label: 'Breadcrumb',
+    locale: 'en',
     items: [{ label: 'Home', href: '/' }, { label: 'Dashboard' }],
   },
 }
@@ -27,6 +29,7 @@ export const TwoItems: Story = {
 export const LongPath: Story = {
   args: {
     label: 'Breadcrumb',
+    locale: 'en',
     items: [
       { label: 'Home', href: '/' },
       { label: 'Products', href: '/products' },
@@ -40,6 +43,7 @@ export const LongPath: Story = {
 export const SingleItem: Story = {
   args: {
     label: 'Breadcrumb',
+    locale: 'en',
     items: [{ label: 'Home' }],
   },
 }

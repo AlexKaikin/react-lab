@@ -4,5 +4,6 @@ model Meta {
     description String
     image       String?
 
-    post Post?
+    post            Post?
+    postTranslation PostTranslation?
 }

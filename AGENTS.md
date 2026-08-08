@@ -81,6 +81,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | Component  | kebab-case        | `user-form.tsx`      |
 | Util       | kebab-case        | `format-date.ts`     |
 
+## Компоненты views (страниц)
+
+- Компонент вью называть с суффиксом `Page` (`HomePage`, `BlogPage`, `PostPage`) — так он не конфликтует с одноимённым типом сущности (`entities/post` экспортирует `Post`), а `export default XxxPage` в `app/**/page.tsx` самодокументируем.
+- Если проп-тайп вью структурно совпадает с тем, что Next генерирует для конкретного роута — `page.tsx` делает `export default XxxPage` напрямую, без функции-обёртки.
+
 ## Переменные и константы
 
 | Тип        | Стиль            | Пример                      |
@@ -127,6 +132,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Состояние: приоритет Server State, минимум Client State
 - Оптимизация рендера: изображения, шрифты, CLS
 - **Ленивая загрузка модалок**: компоненты, передаваемые в `openModal`, должны импортироваться через `next/dynamic` или `React.lazy`, чтобы не увеличивать бандл страницы. Исключение — если модалка гарантированно весит <1KB и будет вызвана сразу.
+- **`getTranslations` только с явным `locale`**: в Server Components вызывать `getTranslations({ locale, namespace })`, никогда `getTranslations(namespace)` без локали. Голый вызов без явного `locale` во вложенном Server Component тихо ломает статическую генерацию (`generateStaticParams`/SSG превращается в `ƒ`), даже если `setRequestLocale` уже был вызван в родительском layout — проверено эмпирически на этом проекте.
+
+## Локализация данных (БД)
+
+- Многоязычный контент моделируется как база + перевод: базовая модель хранит дефолтную локаль (`defaultLocale`) прямо в своих полях, соседняя модель `<Entity>Translation` — только остальные языки, с обязательным `locale` и `@@unique([entityId, locale])` (защита от дублей перевода).
+- Если перевода для запрошенной локали нет — 404, а не молчаливый откат на дефолтный язык: подмена языка вводит в заблуждение и создаёт дублирующийся контент для поисковиков.
+- Пример: `Post`/`PostTranslation`, `PostCategory`/`PostCategoryTranslation` (`prisma/schema/post.prisma`, `post-category.prisma`).
 
 ## Паттерны проектирования
 

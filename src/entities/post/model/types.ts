@@ -1,3 +1,24 @@
-import type { PostCategory, Post as PrismaPost } from '@prisma/client'
+type PostCategory = {
+  id: string
+  slug: string
+  name: string
+}
 
-export type Post = PrismaPost & { category: PostCategory }
+type PostMeta = {
+  id: string
+  title: string
+  description: string
+  image: string | null
+}
+
+export type Post = {
+  id: string
+  slug: string
+  title: string
+  content: string
+  createdAt: Date
+  updatedAt: Date
+  tags: string[]
+  category: PostCategory
+  meta: PostMeta
+}

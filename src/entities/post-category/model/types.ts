@@ -1,1 +1,5 @@
-export type { PostCategory } from '@prisma/client'
+export type PostCategory = {
+  id: string
+  slug: string
+  name: string
+}

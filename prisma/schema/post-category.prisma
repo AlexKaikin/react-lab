@@ -3,5 +3,17 @@ model PostCategory {
     name String
     slug String @unique
 
-    posts Post[]
+    posts        Post[]
+    translations PostCategoryTranslation[]
+}
+
+model PostCategoryTranslation {
+    id     String @id @default(uuid())
+    locale Locale
+    name   String
+
+    categoryId String
+    category   PostCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+    @@unique([categoryId, locale])
 }

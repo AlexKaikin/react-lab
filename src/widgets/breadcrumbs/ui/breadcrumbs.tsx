@@ -1,4 +1,6 @@
 import type { FC } from 'react'
+import { env } from '@/shared/lib/env'
+import type { Locale } from '@/shared/lib/i18n'
 import { LinkButton } from '@/shared/ui'
 
 export type BreadcrumbItem = {
@@ -9,10 +11,30 @@ export type BreadcrumbItem = {
 type BreadcrumbsProps = {
   items: BreadcrumbItem[]
   label: string
+  locale: Locale
 }
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items, label }) => (
+const buildJsonLd = (items: BreadcrumbItem[], locale: Locale) => {
+  const siteUrl = env('NEXT_PUBLIC_SITE_URL').replace(/\/$/, '')
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: `${siteUrl}/${locale}${item.href}` } : {}),
+    })),
+  }
+}
+
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items, label, locale }) => (
   <nav aria-label={label}>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(items, locale)).replace(/</g, '\\u003c') }}
+    />
     <ol className="flex items-center gap-2 text-secondary">
       {items.map((item, index) => {
         const isLast = index === items.length - 1

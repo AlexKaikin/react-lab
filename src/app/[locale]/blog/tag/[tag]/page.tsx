@@ -6,16 +6,26 @@ import type { LocalePageProps } from '@/shared/lib/i18n/types'
 import { BlogPage } from '@/views/blog'
 
 export async function generateStaticParams() {
-  const tags = await getTags()
+  return Promise.all(
+    locales.map(async (locale) => {
+      const tags = await getTags(locale)
 
-  return locales.flatMap((locale) => tags.map((tag) => ({ locale, tag })))
+      return tags.map((tag) => ({ locale, tag }))
+    }),
+  ).then((results) => results.flat())
 }
 
 export async function generateMetadata({ params }: LocalePageProps<'/[locale]/blog/tag/[tag]'>) {
   const { locale, tag } = await params
   const t = await getTranslations({ locale, namespace: 'shared.blog.meta' })
 
-  return buildMetadata({ title: tag, description: t('description'), locale })
+  return buildMetadata({
+    title: tag,
+    description: t('description'),
+    locale,
+    pathname: `/blog/tag/${tag}`,
+    noindex: true,
+  })
 }
 
 export default BlogPage

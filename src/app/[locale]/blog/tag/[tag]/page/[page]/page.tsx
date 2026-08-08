@@ -6,19 +6,21 @@ import type { LocalePageProps } from '@/shared/lib/i18n/types'
 import { BlogPage } from '@/views/blog'
 
 export async function generateStaticParams() {
-  const tags = await getTags()
-
   return Promise.all(
-    locales.flatMap((locale) =>
-      tags.map(async (tag) => {
-        const filter: PostsFilter = { tag }
-        const count = await getPostsCount(filter)
-        const totalPages = Math.ceil(count / POSTS_PAGE_SIZE)
-        const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
+    locales.map(async (locale) => {
+      const tags = await getTags(locale)
 
-        return pages.map((page) => ({ locale, tag, page: String(page) }))
-      }),
-    ),
+      return Promise.all(
+        tags.map(async (tag) => {
+          const filter: PostsFilter = { tag }
+          const count = await getPostsCount(locale, filter)
+          const totalPages = Math.ceil(count / POSTS_PAGE_SIZE)
+          const pages = Array.from({ length: totalPages }, (_, index) => index + 1)
+
+          return pages.map((page) => ({ locale, tag, page: String(page) }))
+        }),
+      ).then((results) => results.flat())
+    }),
   ).then((results) => results.flat())
 }
 
@@ -31,6 +33,8 @@ export async function generateMetadata({ params }: LocalePageProps<'/[locale]/bl
     title: pageNumber > 1 ? `${tag} / ${t('page', { page: pageNumber })}` : tag,
     description: t('description'),
     locale,
+    pathname: `/blog/tag/${tag}/page/${page}`,
+    noindex: true,
   })
 }
 

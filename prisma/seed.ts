@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg'
-import { type Prisma, PrismaClient, ROLE } from '@prisma/client'
+import { Locale, type Prisma, PrismaClient, ROLE } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import { env } from '@/shared/lib/env'
 
@@ -40,9 +40,9 @@ async function main() {
   await Promise.all(users.map((user) => getUserPromise(user)))
 
   const categories = [
-    { name: 'Новости', slug: 'news' },
-    { name: 'Туториалы', slug: 'tutorials' },
-    { name: 'Обзоры', slug: 'reviews' },
+    { name: 'Новости', slug: 'news', nameEn: 'News' },
+    { name: 'Туториалы', slug: 'tutorials', nameEn: 'Tutorials' },
+    { name: 'Обзоры', slug: 'reviews', nameEn: 'Reviews' },
   ]
 
   const tagsPool = ['react', 'nextjs', 'typescript', 'prisma', 'tailwind']
@@ -52,11 +52,20 @@ async function main() {
   await prisma.postCategory.deleteMany()
 
   const createdCategories = await Promise.all(
-    categories.map((category) => prisma.postCategory.create({ data: category })),
+    categories.map((category) =>
+      prisma.postCategory.create({
+        data: {
+          name: category.name,
+          slug: category.slug,
+          translations: { create: [{ locale: Locale.en, name: category.nameEn }] },
+        },
+      }),
+    ),
   )
 
   const posts = Array.from({ length: 21 }, (_, index) => {
     const number = index + 1
+    const tags = [tagsPool[number % tagsPool.length], tagsPool[(number + 1) % tagsPool.length]]
 
     return {
       slug: `post-${number}`,
@@ -67,7 +76,20 @@ async function main() {
         description: `Мета-описание поста ${number}.`,
       },
       categoryId: createdCategories[number % createdCategories.length].id,
-      tags: [tagsPool[number % tagsPool.length], tagsPool[(number + 1) % tagsPool.length]],
+      tags,
+      // у части постов пока нет английского перевода — проверяем сценарий 404 для непереведённого контента
+      translation:
+        number % 2 === 0
+          ? {
+              title: `Post ${number}`,
+              content: `Content of post ${number}.`,
+              meta: {
+                title: `Post ${number} — meta title`,
+                description: `Meta description of post ${number}.`,
+              },
+              tags,
+            }
+          : null,
     }
   })
 
@@ -81,6 +103,21 @@ async function main() {
           meta: { create: post.meta },
           category: { connect: { id: post.categoryId } },
           tags: post.tags,
+          ...(post.translation
+            ? {
+                translations: {
+                  create: [
+                    {
+                      locale: Locale.en,
+                      title: post.translation.title,
+                      content: post.translation.content,
+                      tags: post.translation.tags,
+                      meta: { create: post.translation.meta },
+                    },
+                  ],
+                },
+              }
+            : {}),
         },
       }),
     ),

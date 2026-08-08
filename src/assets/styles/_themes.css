@@ -22,7 +22,7 @@
   --text-secondary: var(--color-neutral-600); /* Подписи, пояснения */
 
   /* Специфические элементы */
-  --skeleton-bg: var(--color-neutral-100);
+  --skeleton-bg: var(--color-neutral-200);
 
   /* Тени */
   --shadow-primary: 0 0 20px 20px rgb(0 0 0 / 0.04);
@@ -43,7 +43,7 @@
   --text-secondary: var(--color-neutral-400);
 
   /* Специфические элементы */
-  --skeleton-bg: var(--color-neutral-900);
+  --skeleton-bg: var(--color-neutral-800);
 
   /* Тени */
   --shadow-primary: 0 0 10px 10px rgba(255, 255, 255, 0.02);
@@ -84,6 +84,14 @@
 }
 
 @layer utilities {
+  .z-overlay {
+    z-index: 40;
+  }
+
+  .z-modal {
+    z-index: 50;
+  }
+
   .container {
     max-width: 100%;
     padding-left: 1rem;

@@ -16,12 +16,12 @@ export const BlogPage = async (props: BlogPageProps) => {
 
   const { filter, basePath, title = t('shared.blog.title') } = await getBlogView(params)
 
-  const count = await getPostsCount(filter)
+  const count = await getPostsCount(locale, filter)
   const totalPages = Math.ceil(count / POSTS_PAGE_SIZE)
 
   if (!Number.isInteger(page) || page < 1 || page > totalPages) notFound()
 
-  const posts = await getPostsPage(page, filter)
+  const posts = await getPostsPage(page, locale, filter)
 
   const breadcrumbs = buildBreadcrumbs({
     params,
@@ -33,7 +33,8 @@ export const BlogPage = async (props: BlogPageProps) => {
 
   return (
     <div className="container flex flex-col gap-4 animate-fade-in">
-      <Breadcrumbs items={breadcrumbs} label={t('shared.breadcrumbs.label')} />
+      <Breadcrumbs items={breadcrumbs} label={t('shared.breadcrumbs.label')} locale={locale} />
+      <h1 className="text-2xl font-bold">{title}</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />

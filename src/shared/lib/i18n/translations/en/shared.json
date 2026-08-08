@@ -25,7 +25,10 @@
     "next": "Next page"
   },
   "search": {
-    "label": "Search"
+    "label": "Search",
+    "placeholder": "Search posts...",
+    "loading": "Searching...",
+    "noResults": "No results found"
   },
   "menu": {
     "label": "Menu",

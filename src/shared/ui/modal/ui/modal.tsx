@@ -27,12 +27,12 @@ export const Modal: FC<ModalProps> = (props) => {
       <div
         role="presentation"
         tabIndex={-1}
-        className={`fixed inset-0 z-40 transition-colors duration-300 ${isAnimating ? 'bg-black/0' : 'bg-black/50'}`}
+        className={`fixed inset-0 z-overlay transition-colors duration-300 ${isAnimating ? 'bg-black/0' : 'bg-black/50'}`}
       />
       {/* biome-ignore lint/a11y/noStaticElementInteractions: клик закрывает по клику вне диалога, keyboard-эквивалент — Escape (глобальный листенер) и кнопка X */}
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: то же самое — клавиатурным пользователям не нужен фокус на самом фоне */}
       <div
-        className={classNames('fixed inset-0 z-50 flex', getPositionClassName(position))}
+        className={classNames('fixed inset-0 z-modal flex', getPositionClassName(position))}
         onClick={(e) => {
           if (e.target === e.currentTarget) handleClose()
         }}
@@ -42,11 +42,11 @@ export const Modal: FC<ModalProps> = (props) => {
           role="dialog"
           aria-modal="true"
           tabIndex={-1}
-          className={classNames('relative', animationClassName, className)}
+          className={classNames('relative m-2', animationClassName, className)}
           onTransitionEnd={handleTransitionEnd}
           {...restProps}
         >
-          <div className="absolute top-0 right-0 z-60">
+          <div className="absolute top-0 right-0">
             <Button onClick={handleClose}>
               <Icon name="X" />
             </Button>
