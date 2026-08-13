@@ -3,10 +3,10 @@
 import type { FC, ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { classNames } from '@/shared/lib/class-names'
+import type { Animation } from '@/shared/ui/animation'
 import { Button } from '@/shared/ui/button'
 import { Icon } from '@/shared/ui/icon'
 import { getPositionClassName, type Position } from '../lib/get-position-class-name'
-import type { Animation } from '../model/use-animation'
 import { useModal } from '../model/use-modal'
 
 export type ModalProps = {
@@ -27,7 +27,7 @@ export const Modal: FC<ModalProps> = (props) => {
       <div
         role="presentation"
         tabIndex={-1}
-        className={`fixed inset-0 z-overlay transition-colors duration-300 ${isAnimating ? 'bg-black/0' : 'bg-black/50'}`}
+        className={`fixed inset-0 z-overlay transition-[background-color,backdrop-filter] duration-300 ${isAnimating ? 'bg-black/0 backdrop-blur-none' : 'bg-black/10 backdrop-blur-md'}`}
       />
       {/* biome-ignore lint/a11y/noStaticElementInteractions: клик закрывает по клику вне диалога, keyboard-эквивалент — Escape (глобальный листенер) и кнопка X */}
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: то же самое — клавиатурным пользователям не нужен фокус на самом фоне */}
@@ -42,7 +42,7 @@ export const Modal: FC<ModalProps> = (props) => {
           role="dialog"
           aria-modal="true"
           tabIndex={-1}
-          className={classNames('relative m-2', animationClassName, className)}
+          className={classNames('paper relative m-2', animationClassName, className)}
           onTransitionEnd={handleTransitionEnd}
           {...restProps}
         >

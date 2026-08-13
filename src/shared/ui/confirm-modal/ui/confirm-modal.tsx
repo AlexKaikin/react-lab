@@ -18,13 +18,11 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({ cb, ...restProps }) 
   }
 
   return (
-    <Modal
-      aria-label={t('label')}
-      className="flex flex-col bg-secondary w-70 rounded-md p-8 items-center"
-      {...restProps}
-    >
-      {t('question')}
-      <Button onClick={handleConfirm}>{t('yes')}</Button>
+    <Modal aria-label={t('label')} className="flex w-70 flex-col gap-4 items-center p-8" {...restProps}>
+      <h3>{t('question')}</h3>
+      <Button variant="outlined" onClick={handleConfirm}>
+        {t('yes')}
+      </Button>
     </Modal>
   )
 }

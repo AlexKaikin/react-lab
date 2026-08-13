@@ -1,5 +1,5 @@
 import { db } from '@/shared/api/db'
-import type { Locale } from '@/shared/lib/i18n'
+import { defaultLocale, type Locale } from '@/shared/lib/i18n'
 
 type RawCategory = {
   id: string
@@ -29,4 +29,29 @@ export const getCategory = async (slug: string, locale: Locale) => {
   })
 
   return category ? resolveCategory(category) : null
+}
+
+export const getCategoryLocales = async (id: string): Promise<Locale[] | null> => {
+  const category = await db.postCategory.findUnique({
+    where: { id },
+    include: { translations: { select: { locale: true } } },
+  })
+
+  if (!category) return null
+
+  return [defaultLocale, ...category.translations.map((translation) => translation.locale)]
+}
+
+export const getCategoriesWithLocales = async () => {
+  const categories = await db.postCategory.findMany({
+    include: { translations: { select: { locale: true } } },
+    orderBy: { name: 'asc' },
+  })
+
+  return categories.map((category) => ({
+    id: category.id,
+    slug: category.slug,
+    name: category.name,
+    locales: [defaultLocale, ...category.translations.map((translation) => translation.locale)],
+  }))
 }

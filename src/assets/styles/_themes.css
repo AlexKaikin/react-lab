@@ -1,13 +1,31 @@
 :root {
   --radius: 10px;
 
-  /* Семантические цвета */
-  --semantic-primary: #3b82f6; /* blue-500 */
-  --semantic-secondary: #6b7280; /* gray-500 */
-  --semantic-info: #3b82f6; /* blue-500 */
-  --semantic-error: #ef4444; /* red-500 */
-  --semantic-warning: #eab308; /* yellow-500 */
-  --semantic-success: #22c55e; /* green-500 */
+  /* Семантические цвета (светлая/тёмная вариации на случай необходимости) */
+  /* primary/secondary — инвертирующаяся пара «чернила/бумага»: контраст держится в обеих темах сам собой */
+  --semantic-primary-light: var(--color-neutral-50); /* почти белый — фон акцентной кнопки на тёмном фоне */
+  --semantic-primary-dark: var(--color-neutral-950); /* почти чёрный — фон акцентной кнопки на светлом фоне */
+  --semantic-primary-foreground-light: var(--color-neutral-950); /* текст на белом фоне акцентной кнопки */
+  --semantic-primary-foreground-dark: var(--color-neutral-50); /* текст на чёрном фоне акцентной кнопки */
+  --semantic-secondary-light: var(--color-neutral-50); /* почти белый, контраст на тёмном фоне */
+  --semantic-secondary-dark: var(--color-neutral-300); /* заметен на светлом фоне */
+  --semantic-info-light: #2563eb; /* blue-600 */
+  --semantic-info-dark: #1e40af; /* blue-800 */
+  --semantic-error-light: #dc2626; /* red-600 */
+  --semantic-error-dark: #991b1b; /* red-800 */
+  --semantic-warning-light: #ca8a04; /* yellow-600 */
+  --semantic-warning-dark: #854d0e; /* yellow-800 */
+  --semantic-success-light: #16a34a; /* green-600 */
+  --semantic-success-dark: #166534; /* green-800 */
+
+  /* Активные семантические цвета: в светлой теме — тёмный оттенок (контраст на белом фоне) */
+  --semantic-primary: var(--semantic-primary-dark);
+  --semantic-primary-foreground: var(--semantic-primary-foreground-dark);
+  --semantic-secondary: var(--semantic-secondary-dark);
+  --semantic-info: var(--semantic-info-dark);
+  --semantic-error: var(--semantic-error-dark);
+  --semantic-warning: var(--semantic-warning-dark);
+  --semantic-success: var(--semantic-success-dark);
 
   /* Фоновые слои (от нижнего к верхнему) */
   --bg-primary: var(--color-neutral-50); /* Основной блок/карточка */
@@ -23,13 +41,18 @@
 
   /* Специфические элементы */
   --skeleton-bg: var(--color-neutral-200);
-
-  /* Тени */
-  --shadow-primary: 0 0 20px 20px rgb(0 0 0 / 0.04);
-  --shadow-secondary: 0 0 10px 10px rgb(0 0 0 / 0.06);
 }
 
 [data-theme="dark"] {
+  /* Активные семантические цвета: в тёмной теме — светлый оттенок (контраст на тёмном фоне) */
+  --semantic-primary: var(--semantic-primary-light);
+  --semantic-primary-foreground: var(--semantic-primary-foreground-light);
+  --semantic-secondary: var(--semantic-secondary-light);
+  --semantic-info: var(--semantic-info-light);
+  --semantic-error: var(--semantic-error-light);
+  --semantic-warning: var(--semantic-warning-light);
+  --semantic-success: var(--semantic-success-light);
+
   /* Фоновые слои (инверсия) */
   --bg-primary: var(--color-neutral-950); /* Темно-серые карточки */
   --bg-secondary: var(--color-neutral-900); /* Вложенные элементы */
@@ -44,15 +67,12 @@
 
   /* Специфические элементы */
   --skeleton-bg: var(--color-neutral-800);
-
-  /* Тени */
-  --shadow-primary: 0 0 10px 10px rgba(255, 255, 255, 0.02);
-  --shadow-secondary: 0 0 10px 10px rgba(255, 255, 255, 0.04);
 }
 
 @theme inline {
   /* Семантические цвета */
   --color-semantic-primary: var(--semantic-primary); /* ← Добавь эту строку */
+  --color-semantic-primary-foreground: var(--semantic-primary-foreground);
   --color-semantic-secondary: var(--semantic-secondary);
   --color-semantic-info: var(--semantic-info);
   --color-semantic-error: var(--semantic-error);
@@ -74,10 +94,6 @@
   /* Специфические элементы */
   --color-skeleton: var(--skeleton-bg);
 
-  /* Тени */
-  --shadow-primary: var(--shadow-primary);
-  --shadow-secondary: var(--shadow-secondary);
-
   --radius-sm: calc(var(--radius) / 2);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) * 2);
@@ -92,22 +108,35 @@
     z-index: 50;
   }
 
+  .z-toast {
+    z-index: 60;
+  }
+
   .container {
     max-width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out forwards;
+  .paper {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius);
   }
 
-  @keyframes fadeIn {
-    from {
+  .animate-fade-in {
+    opacity: 1;
+    transition:
+      opacity 0.5s ease-in-out,
+      transform var(--default-transition-duration) var(--default-transition-timing-function),
+      translate var(--default-transition-duration) var(--default-transition-timing-function),
+      scale var(--default-transition-duration) var(--default-transition-timing-function),
+      rotate var(--default-transition-duration) var(--default-transition-timing-function);
+  }
+
+  @starting-style {
+    .animate-fade-in {
       opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 }

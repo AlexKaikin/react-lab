@@ -21,15 +21,25 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.7.1",
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
+    "@uiw/react-md-editor": "^4.1.1",
     "bcryptjs": "^3.0.3",
     "lucide-react": "^1.23.0",
+    "mdast-util-to-string": "^4.0.0",
     "next": "16.2.10",
+    "next-auth": "^4.24.15",
     "next-intl": "^4.13.2",
+    "nodemailer": "^7.0.13",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-hook-form": "^7.85.0",
+    "react-markdown": "^10.1.0",
+    "remark-parse": "^11.0.0",
     "tailwind-merge": "^3.6.0",
+    "unified": "^11.0.5",
+    "zod": "^4.4.3",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
@@ -40,6 +50,7 @@
     "@storybook/nextjs-vite": "^10.4.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitest/coverage-v8": "^4.1.10",

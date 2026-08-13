@@ -1,6 +1,11 @@
 {
+  "locale": {
+    "ru": "Russian",
+    "en": "English"
+  },
   "header": {
-    "title": "react lab"
+    "title": "react lab",
+    "logout": "Log out"
   },
   "home": {
     "meta": {
@@ -49,6 +54,246 @@
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",
     "retry": "Retry"
+  },
+  "auth": {
+    "login": {
+      "label": "Login",
+      "submit": "Log in",
+      "invalidCredentials": "Invalid email or password"
+    },
+    "signup": {
+      "label": "Sign up",
+      "submit": "Sign up",
+      "emailTaken": "A user with this email is already registered",
+      "invalidData": "Please check the form for errors",
+      "success": "Check your inbox — we've sent you an activation link",
+      "activationEmailSubject": "Account activation",
+      "activationEmailIntro": "To activate your account, follow this link:",
+      "activationEmailButton": "Activate account",
+      "agreeToTerms": "I agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>"
+    },
+    "activate": {
+      "label": "Account activation",
+      "success": "Account activated, you can now log in",
+      "tokenExpired": "This link is invalid or has expired"
+    },
+    "forgotPassword": {
+      "label": "Reset password",
+      "link": "Forgot password?",
+      "submit": "Send reset link",
+      "success": "If an account with this email exists, we've sent a password reset link",
+      "backToLogin": "Back to login",
+      "emailSubject": "Password reset",
+      "emailIntro": "To reset your password, follow this link:",
+      "emailButton": "Reset password"
+    },
+    "resetPassword": {
+      "label": "New password",
+      "submit": "Save password",
+      "success": "Password changed, you can now log in with the new password",
+      "tokenExpired": "This link is invalid or has expired",
+      "invalidData": "Please check the form for errors",
+      "backHome": "Back home"
+    },
+    "validation": {
+      "invalidEmail": "Invalid email",
+      "passwordRequired": "Enter your password",
+      "firstNameTooShort": "At least 2 characters",
+      "passwordTooShort": "At least 8 characters",
+      "passwordsMismatch": "Passwords don't match",
+      "agreeRequired": "You must accept the Terms of Service"
+    },
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "firstNamePlaceholder": "First name",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "switchToSignup": "No account? Sign up",
+    "switchToLogin": "Already have an account? Log in"
+  },
+  "legal": {
+    "terms": {
+      "label": "Terms of Service",
+      "updated": "Last updated: August 13, 2026",
+      "sections": [
+        {
+          "heading": "1. General provisions",
+          "body": "These Terms of Service (\"Terms\") govern your use of the REACT LAB website (the \"Service\"). By registering for or using the Service, you confirm that you have read and accept these Terms in full. If you do not agree with any part of these Terms, please do not use the Service."
+        },
+        {
+          "heading": "2. Registration and account",
+          "body": "Some features of the Service may require registration. You agree to provide accurate information when registering and to keep it up to date. You are responsible for safeguarding your account credentials and for all activity that occurs under your account."
+        },
+        {
+          "heading": "3. User rights and obligations",
+          "body": "When using the Service, you agree not to violate applicable law, not to post content that infringes the rights of third parties, not to attempt unauthorized access to the Service's systems, and not to use the Service to distribute spam or malicious software."
+        },
+        {
+          "heading": "4. Content and intellectual property",
+          "body": "All materials on the Service, including text, design, logos, and source code, are intellectual property protected by law. Using these materials without the rights holder's permission is prohibited, except as permitted by law."
+        },
+        {
+          "heading": "5. Limitation of liability",
+          "body": "The Service is provided \"as is\" without warranties of any kind. We are not liable for any damages arising from the use, or inability to use, the Service, including downtime, errors, or data loss."
+        },
+        {
+          "heading": "6. Changes to the Terms",
+          "body": "We may update these Terms at any time. The current version is always available on this page. Continued use of the Service after changes are made constitutes acceptance of the updated Terms."
+        },
+        {
+          "heading": "7. Contact",
+          "body": "For any questions regarding these Terms, please reach out through the contact form on the website."
+        }
+      ]
+    },
+    "privacy": {
+      "label": "Privacy Policy",
+      "updated": "Last updated: August 13, 2026",
+      "sections": [
+        {
+          "heading": "1. Data we collect",
+          "body": "We may collect the following data: name, email address, password (encrypted), as well as technical information such as IP address, device and browser type, and cookies."
+        },
+        {
+          "heading": "2. How we use data",
+          "body": "The data we collect is used to register and authenticate users, provide the Service's features, communicate with you (for example, to confirm registration or reset your password), and improve the quality of the Service."
+        },
+        {
+          "heading": "3. Cookies",
+          "body": "The Service uses cookies to remember your preferences (such as interface language and theme) and to keep you signed in. You can disable cookies in your browser settings, though this may limit some features."
+        },
+        {
+          "heading": "4. Sharing data with third parties",
+          "body": "We do not share personal data with third parties, except where required by law or necessary to operate the Service (for example, a hosting provider or an email service used to send notifications)."
+        },
+        {
+          "heading": "5. Data storage and protection",
+          "body": "Data is retained for as long as necessary for the purposes it was collected for, or until you delete your account. We apply reasonable technical and organizational measures to protect your data from unauthorized access."
+        },
+        {
+          "heading": "6. Your rights",
+          "body": "You may request access to, correction of, or deletion of your personal data by contacting us through the contact form or your account settings."
+        },
+        {
+          "heading": "7. Changes to this Policy",
+          "body": "We may update this Policy from time to time. The current version is always available on this page. We recommend reviewing it periodically."
+        },
+        {
+          "heading": "8. Contact",
+          "body": "For questions about how we handle personal data, please reach out through the contact form on the website."
+        }
+      ]
+    }
+  },
+  "account": {
+    "profile": {
+      "label": "Profile",
+      "lastName": "Last name",
+      "about": "About",
+      "location": "Location",
+      "avatarUrl": "Avatar URL",
+      "submit": "Save",
+      "saved": "Saved",
+      "invalidData": "Please check the form for errors"
+    },
+    "changeEmail": {
+      "label": "Change email",
+      "currentPasswordPlaceholder": "Current password",
+      "submit": "Change email",
+      "success": "Email changed",
+      "invalidPassword": "Incorrect password",
+      "invalidData": "Please check the form for errors"
+    },
+    "changePassword": {
+      "label": "Change password",
+      "currentPasswordPlaceholder": "Current password",
+      "newPasswordPlaceholder": "New password",
+      "submit": "Change password",
+      "success": "Password changed",
+      "invalidPassword": "Incorrect password",
+      "invalidData": "Please check the form for errors"
+    },
+    "validation": {
+      "invalidUrl": "Invalid URL"
+    }
+  },
+  "admin": {
+    "label": "Admin",
+    "nav": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "categories": "Post categories"
+    },
+    "dashboard": {
+      "label": "Dashboard",
+      "stats": {
+        "posts": "Posts",
+        "categories": "Post categories"
+      }
+    },
+    "posts": {
+      "label": "Posts",
+      "create": "Create post",
+      "createLabel": "New post",
+      "editLabel": "Edit post",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No posts yet",
+      "noTranslation": "no translation",
+      "saved": "Post saved",
+      "deleted": "Post deleted",
+      "deleteError": "Failed to delete post",
+      "invalidData": "Please check the form for errors",
+      "submit": "Save",
+      "tabsLabel": "Content language",
+      "slugPlaceholder": "URL (slug)",
+      "categoryPlaceholder": "Select a category",
+      "titlePlaceholder": "Title",
+      "tagsPlaceholder": "Tags, comma-separated",
+      "metaTitlePlaceholder": "SEO title",
+      "metaDescriptionPlaceholder": "SEO description",
+      "metaImagePlaceholder": "Image URL",
+      "validation": {
+        "slugRequired": "Enter a slug",
+        "slugInvalid": "Latin letters, digits and hyphens only",
+        "slugTaken": "This slug is already taken",
+        "categoryRequired": "Select a category",
+        "titleRequired": "Enter a title",
+        "contentRequired": "Enter the content",
+        "metaTitleRequired": "Enter an SEO title",
+        "metaDescriptionRequired": "Enter an SEO description",
+        "enIncomplete": "Fill in the translation's title, content and SEO fields"
+      }
+    },
+    "categories": {
+      "label": "Categories",
+      "create": "Create category",
+      "createLabel": "New category",
+      "editLabel": "Edit category",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No categories yet",
+      "noTranslation": "no translation",
+      "saved": "Category saved",
+      "deleted": "Category deleted",
+      "deleteError": "Failed to delete category",
+      "deleteHasPosts": "Can't delete — used in {count} post(s)",
+      "invalidData": "Please check the form for errors",
+      "submit": "Save",
+      "tabsLabel": "Name language",
+      "slugPlaceholder": "URL (slug)",
+      "namePlaceholder": "Name",
+      "validation": {
+        "slugRequired": "Enter a slug",
+        "slugInvalid": "Latin letters, digits and hyphens only",
+        "slugTaken": "This slug is already taken",
+        "nameRequired": "Enter a name"
+      }
+    }
+  },
+  "toast": {
+    "close": "Close notification"
   },
   "themeToggle": {
     "label": "Toggle theme"

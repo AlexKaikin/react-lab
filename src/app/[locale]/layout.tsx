@@ -2,9 +2,11 @@ import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { ThemeProvider } from '@/features/theme'
+import { SessionProvider } from '@/shared/api/auth/session-provider'
 import { locales } from '@/shared/lib/i18n'
 import { HtmlLayout } from '@/shared/ui/html-layout'
 import { ModalProvider } from '@/shared/ui/modal'
+import { ToastProvider } from '@/shared/ui/toast'
 import { Header } from '@/widgets/header'
 
 export function generateStaticParams() {
@@ -24,9 +26,12 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
     <HtmlLayout lang={locale}>
       <ThemeProvider>
         <NextIntlClientProvider messages={messages}>
-          <Header className="py-4" locale={locale} />
-          <main className="grow relative bg-primary py-4">{children}</main>
-          <ModalProvider />
+          <SessionProvider>
+            <Header className="py-4" locale={locale} />
+            <main className="flex grow flex-col relative py-4">{children}</main>
+            <ModalProvider />
+            <ToastProvider />
+          </SessionProvider>
         </NextIntlClientProvider>
       </ThemeProvider>
     </HtmlLayout>

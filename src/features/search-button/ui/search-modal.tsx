@@ -60,7 +60,7 @@ export const SearchModal: React.FC = () => {
 
   return (
     <Modal
-      className="bg-secondary w-[calc(100%-1rem)] max-w-100 rounded-md"
+      className="w-[calc(100%-1rem)] max-w-100 rounded-md"
       animation="slideDown"
       position="top"
       aria-label={t('label')}

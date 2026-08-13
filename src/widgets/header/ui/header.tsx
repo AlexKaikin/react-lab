@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import type { ComponentProps, FC } from 'react'
 import { LanguageToggle } from '@/features/language-toggle'
 import { MenuButton } from '@/features/menu-button'
-// import { ProfileButton } from '@/features/profile-button'
+import { ProfileButton } from '@/features/profile-button'
 import { SearchButton } from '@/features/search-button'
 import { ThemeToggle } from '@/features/theme'
 import { classNames } from '@/shared/lib/class-names'
@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = async ({ className, locale }) => {
       <SearchButton />
       <LanguageToggle />
       <ThemeToggle />
-      {/* <ProfileButton /> */}
+      <ProfileButton />
     </header>
   )
 }

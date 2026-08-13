@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
+import { type Animation, useAnimation } from '@/shared/ui/animation'
 import { useModalStore } from '@/shared/ui/modal/model/use-modal-store'
-import { type Animation, useAnimation } from './use-animation'
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'

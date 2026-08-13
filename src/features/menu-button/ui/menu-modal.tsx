@@ -24,7 +24,7 @@ export const MenuModal: React.FC = () => {
 
   return (
     <Modal
-      className="my-2 mx-2 self-stretch bg-secondary w-70 rounded-md p-4"
+      className="my-2 mx-2 self-stretch w-70 rounded-md p-4"
       animation="slideLeft"
       position="left"
       aria-label={t('label')}

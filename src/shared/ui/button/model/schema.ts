@@ -1,6 +1,8 @@
-export type TButtonSize = 'small' | 'medium' | 'large'
-export type TButtonVariant = 'text' | 'contained' | 'outlined'
-export type TButtonColor = 'primary' | 'secondary' | 'info' | 'error' | 'warning' | 'success'
+import type { TColor, TSize, TVariant } from '@/shared/lib/variant-style'
+
+export type TButtonSize = TSize
+export type TButtonVariant = TVariant
+export type TButtonColor = TColor
 export type TButtonShape = 'square'
 
 export type TButton<T> = T & {
