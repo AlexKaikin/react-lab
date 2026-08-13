@@ -42,7 +42,11 @@ export const Modal: FC<ModalProps> = (props) => {
           role="dialog"
           aria-modal="true"
           tabIndex={-1}
-          className={classNames('paper relative m-2', animationClassName, className)}
+          className={classNames(
+            'paper relative m-2 max-h-[calc(100vh-1rem)] overflow-y-auto',
+            animationClassName,
+            className,
+          )}
           onTransitionEnd={handleTransitionEnd}
           {...restProps}
         >

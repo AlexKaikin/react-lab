@@ -16,10 +16,14 @@ const resolveCategory = (category: RawCategory) => ({
 
 export const getCategories = async (locale: Locale) => {
   const categories = await db.postCategory.findMany({
+    where: { isActive: true },
     include: { translations: { where: { locale } } },
   })
 
-  return categories.map(resolveCategory).sort((a, b) => a.name.localeCompare(b.name))
+  return categories
+    .filter((category) => locale === defaultLocale || category.translations.length > 0)
+    .map(resolveCategory)
+    .sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export const getCategory = async (slug: string, locale: Locale) => {
@@ -28,7 +32,10 @@ export const getCategory = async (slug: string, locale: Locale) => {
     include: { translations: { where: { locale } } },
   })
 
-  return category ? resolveCategory(category) : null
+  if (!category || !category.isActive) return null
+  if (locale !== defaultLocale && category.translations.length === 0) return null
+
+  return resolveCategory(category)
 }
 
 export const getCategoryLocales = async (id: string): Promise<Locale[] | null> => {

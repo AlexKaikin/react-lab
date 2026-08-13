@@ -300,5 +300,10 @@
   },
   "languageToggle": {
     "label": "Switch language"
+  },
+  "footer": {
+    "categoriesLabel": "Categories",
+    "tagsLabel": "Tags",
+    "legalLabel": "Legal information"
   }
 }

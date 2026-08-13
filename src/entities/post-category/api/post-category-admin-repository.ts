@@ -29,6 +29,7 @@ export const getCategoriesForAdmin = async () => {
     return {
       id: category.id,
       slug: category.slug,
+      isActive: category.isActive,
       ru: { name: category.name },
       en: translation ? { name: translation.name } : null,
       postsCount: category._count.posts,
@@ -66,6 +67,13 @@ export const updateCategory = (id: string, input: CategoryAdminInput) =>
       await tx.postCategoryTranslation.delete({ where: { id: existingTranslation.id } })
     }
   })
+
+export const deactivateCategory = async (slug: string) => {
+  const category = await db.postCategory.findUnique({ where: { slug }, select: { id: true } })
+  if (!category) return null
+
+  return db.postCategory.update({ where: { id: category.id }, data: { isActive: false } })
+}
 
 export const deleteCategory = async (id: string) => {
   const postsCount = await db.post.count({ where: { categoryId: id } })

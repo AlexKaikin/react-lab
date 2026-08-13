@@ -1,6 +1,7 @@
 export type { CategoryAdminInput, CategoryLocaleInput } from './api/post-category-admin-repository'
 export {
   createCategory,
+  deactivateCategory,
   deleteCategory,
   getCategoriesForAdmin,
   getCategoriesTotalCount,

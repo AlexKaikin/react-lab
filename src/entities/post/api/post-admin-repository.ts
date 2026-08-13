@@ -33,6 +33,7 @@ export const getPostsForAdmin = async () => {
     title: post.title,
     category: { name: post.category.name },
     createdAt: post.createdAt,
+    isActive: post.isActive,
     hasTranslation: post.translations.some((translation) => translation.locale === 'en'),
   }))
 }
@@ -51,6 +52,7 @@ export const getPostForAdmin = async (slug: string) => {
     id: post.id,
     slug: post.slug,
     categoryId: post.categoryId,
+    isActive: post.isActive,
     ru: {
       title: post.title,
       content: post.content,
@@ -143,6 +145,13 @@ export const updatePost = (id: string, input: PostAdminInput) =>
       await tx.meta.delete({ where: { id: existingTranslation.metaId } })
     }
   })
+
+export const deactivatePost = async (slug: string) => {
+  const post = await db.post.findUnique({ where: { slug }, select: { id: true } })
+  if (!post) return null
+
+  return db.post.update({ where: { id: post.id }, data: { isActive: false } })
+}
 
 export const deletePost = (id: string) =>
   db.$transaction(async (tx) => {

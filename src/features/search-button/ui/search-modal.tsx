@@ -59,33 +59,30 @@ export const SearchModal: React.FC = () => {
   }, [debouncedQuery, locale])
 
   return (
-    <Modal
-      className="w-[calc(100%-1rem)] max-w-100 rounded-md"
-      animation="slideDown"
-      position="top"
-      aria-label={t('label')}
-    >
-      <div className="flex flex-col gap-4 p-4">
-        <div>{t('label')}</div>
-        <Input
-          ref={inputRef}
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('placeholder')}
-        />
+    <Modal className="w-full max-w-200 rounded-md" animation="slideDown" position="top" aria-label={t('label')}>
+      <div className="flex flex-col gap-6 p-6">
+        <div className="flex flex-col gap-4">
+          <h2>{t('label')}</h2>
+          <Input
+            ref={inputRef}
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={t('placeholder')}
+          />
+        </div>
 
         {(isLoading || results !== null) && (
-          <ul aria-live="polite" className="flex max-h-80 flex-col gap-2 overflow-y-auto">
+          <ul aria-live="polite" className="flex max-h-80 flex-col gap-1 overflow-y-auto">
             {isLoading &&
               SKELETON_ROWS.map((row) => (
-                <li key={row} className="flex flex-col gap-1">
+                <li key={row} className="flex flex-col gap-1 p-2">
                   <Skeleton className="h-4 w-3/4" />
                   <Skeleton className="h-3 w-1/3" />
                 </li>
               ))}
 
-            {!isLoading && results?.length === 0 && <li className="text-secondary opacity-50">{t('noResults')}</li>}
+            {!isLoading && results?.length === 0 && <li className="p-2 text-secondary opacity-50">{t('noResults')}</li>}
 
             {!isLoading &&
               results?.map((post) => (
@@ -93,7 +90,7 @@ export const SearchModal: React.FC = () => {
                   <Link
                     href={`/blog/${post.slug}`}
                     onClick={closeModal}
-                    className="flex flex-col hover:opacity-100 opacity-80 transition-opacity"
+                    className="flex flex-col gap-0.5 rounded-md p-2 opacity-80 transition-[opacity,background-color] hover:bg-secondary hover:opacity-100"
                   >
                     <span>{post.title}</span>
                     <span className="text-xs text-secondary opacity-50">{post.category}</span>

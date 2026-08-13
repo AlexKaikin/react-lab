@@ -300,5 +300,10 @@
   },
   "languageToggle": {
     "label": "Переключить язык"
+  },
+  "footer": {
+    "categoriesLabel": "Категории",
+    "tagsLabel": "Теги",
+    "legalLabel": "Правовая информация"
   }
 }

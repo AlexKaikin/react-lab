@@ -7,6 +7,7 @@ import { locales } from '@/shared/lib/i18n'
 import { HtmlLayout } from '@/shared/ui/html-layout'
 import { ModalProvider } from '@/shared/ui/modal'
 import { ToastProvider } from '@/shared/ui/toast'
+import { Footer } from '@/widgets/footer'
 import { Header } from '@/widgets/header'
 
 export function generateStaticParams() {
@@ -29,6 +30,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
           <SessionProvider>
             <Header className="py-4" locale={locale} />
             <main className="flex grow flex-col relative py-4">{children}</main>
+            <Footer locale={locale} />
             <ModalProvider />
             <ToastProvider />
           </SessionProvider>
