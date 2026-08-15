@@ -112,6 +112,7 @@ export const Select = ({ options, value, onChange, placeholder, id, name, classN
   return (
     <Dropdown
       panelRole="listbox"
+      matchTriggerWidth
       trigger={(triggerProps) => (
         <button
           type="button"

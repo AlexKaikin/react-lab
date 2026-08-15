@@ -16,6 +16,7 @@ export const PostPage = async ({ params }: LocalePageProps<'/[locale]/blog/[slug
     { label: t('shared.menu.home'), href: '/' },
     { label: t('shared.menu.blog'), href: '/blog' },
     { label: post.category.name, href: `/blog/category/${post.category.slug}` },
+    { label: post.title },
   ]
 
   const jsonLd = buildArticleJsonLd({

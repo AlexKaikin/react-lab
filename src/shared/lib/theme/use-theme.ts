@@ -1,5 +1,7 @@
+'use client'
+
 import { create } from 'zustand'
-import type { Theme } from '../model/types'
+import type { Theme } from './types'
 
 type ThemeState = {
   theme: Theme | null

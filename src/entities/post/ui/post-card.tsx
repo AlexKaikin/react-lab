@@ -9,9 +9,12 @@ type PostCardProps = {
 
 export const PostCard = ({ post }: PostCardProps) => (
   <Link href={`/blog/${post.slug}`}>
-    <article className="paper flex flex-col gap-2 p-4 transition-transform hover:scale-102">
-      <h2 className="line-clamp-2 text-lg font-bold">{post.title}</h2>
-      <p className="text-secondary line-clamp-3">{stripMarkdown(post.content)}</p>
+    <article className="paper flex flex-col gap-4 p-6 transition-transform hover:scale-102">
+      <div className="flex flex-col gap-2">
+        <h2 className="line-clamp-2 text-lg font-bold">{post.title}</h2>
+        <p className="text-secondary line-clamp-3">{stripMarkdown(post.content)}</p>
+      </div>
+
       <div className="flex items-center gap-2">
         <time dateTime={post.createdAt.toISOString()} className="text-xs text-secondary opacity-50">
           {post.createdAt.toLocaleDateString()}

@@ -9,9 +9,10 @@ import { Input, PasswordInput } from '@/shared/ui/form/input'
 
 type FormInputProps<TFieldValues extends FieldValues> = Omit<ComponentProps<typeof Input>, 'name'> & {
   name: Path<TFieldValues>
+  label?: string
 }
 
-export const FormInput = <TFieldValues extends FieldValues>({ name, ...rest }: FormInputProps<TFieldValues>) => {
+export const FormInput = <TFieldValues extends FieldValues>({ name, label, ...rest }: FormInputProps<TFieldValues>) => {
   const t = useTranslations()
   const {
     register,
@@ -27,7 +28,10 @@ export const FormInput = <TFieldValues extends FieldValues>({ name, ...rest }: F
 
   return (
     <div className="flex flex-col">
-      <InputComponent {...register(name)} {...rest} />
+      <div className="flex flex-col gap-2">
+        {label && <span className="text-secondary text-xs">{label}</span>}
+        <InputComponent {...register(name)} {...rest} />
+      </div>
       <Collapse isVisible={!!messageKey} gapClassName="pt-2">
         {lastMessageKey && <FieldError message={t(lastMessageKey as Parameters<typeof t>[0])} />}
       </Collapse>

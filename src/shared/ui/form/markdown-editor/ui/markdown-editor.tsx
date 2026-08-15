@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 import { type FieldValues, type Path, useController, useFormContext } from 'react-hook-form'
-import { useTheme } from '@/features/theme'
+import { useTheme } from '@/shared/lib/theme'
 import { Collapse } from '@/shared/ui/collapse'
 import { FieldError } from '@/shared/ui/form/field-error'
 

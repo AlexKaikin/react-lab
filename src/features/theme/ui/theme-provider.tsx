@@ -1,9 +1,7 @@
 'use client'
 
 import { type ReactNode, useEffect } from 'react'
-import { THEME, THEMES } from '../model/constants'
-import type { Theme } from '../model/types'
-import { useTheme } from '../model/use-theme'
+import { THEME, THEMES, type Theme, useTheme } from '@/shared/lib/theme'
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { setTheme } = useTheme()

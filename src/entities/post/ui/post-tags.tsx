@@ -13,9 +13,11 @@ export const PostTags = ({ tags }: PostTagsProps) => {
   const hiddenCount = tags.length - visibleTags.length
 
   return (
-    <div className="flex flex-nowrap items-center gap-2">
+    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
       {visibleTags.map((tag) => (
-        <Tag key={tag}>{tag}</Tag>
+        <Tag key={tag} color="primary">
+          {tag}
+        </Tag>
       ))}
       {hiddenCount > 0 && <span className="shrink-0 text-xs text-secondary opacity-50">+{hiddenCount}</span>}
     </div>

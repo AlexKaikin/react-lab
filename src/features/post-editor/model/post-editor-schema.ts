@@ -1,9 +1,18 @@
 import { z } from 'zod'
 import { defaultLocale, type Locale, locales } from '@/shared/lib/i18n'
 
+export const META_TITLE_MAX_LENGTH = 60
+export const META_DESCRIPTION_MAX_LENGTH = 160
+
 const metaSchema = z.object({
-  title: z.string().min(1, { error: 'shared.admin.posts.validation.metaTitleRequired' }),
-  description: z.string().min(1, { error: 'shared.admin.posts.validation.metaDescriptionRequired' }),
+  title: z
+    .string()
+    .min(1, { error: 'shared.admin.posts.validation.metaTitleRequired' })
+    .max(META_TITLE_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaTitleTooLong' }),
+  description: z
+    .string()
+    .min(1, { error: 'shared.admin.posts.validation.metaDescriptionRequired' })
+    .max(META_DESCRIPTION_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaDescriptionTooLong' }),
   image: z.union([z.literal(''), z.url({ error: 'shared.account.validation.invalidUrl' })]),
 })
 
@@ -19,8 +28,10 @@ const optionalLocaleSchema = z.object({
   content: z.string(),
   tags: z.string(),
   meta: z.object({
-    title: z.string(),
-    description: z.string(),
+    title: z.string().max(META_TITLE_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaTitleTooLong' }),
+    description: z
+      .string()
+      .max(META_DESCRIPTION_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaDescriptionTooLong' }),
     image: z.union([z.literal(''), z.url({ error: 'shared.account.validation.invalidUrl' })]),
   }),
 })

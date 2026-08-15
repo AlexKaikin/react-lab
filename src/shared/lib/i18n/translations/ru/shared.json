@@ -38,7 +38,8 @@
   "menu": {
     "label": "Меню",
     "home": "Главная",
-    "blog": "Блог"
+    "blog": "Блог",
+    "settings": "Настройки"
   },
   "confirm": {
     "label": "Подтвердить",
@@ -251,6 +252,7 @@
       "categoryPlaceholder": "Выберите категорию",
       "titlePlaceholder": "Заголовок",
       "tagsPlaceholder": "Теги через запятую",
+      "seoSection": "SEO",
       "metaTitlePlaceholder": "SEO-заголовок",
       "metaDescriptionPlaceholder": "SEO-описание",
       "metaImagePlaceholder": "Ссылка на изображение",
@@ -262,7 +264,9 @@
         "titleRequired": "Введите заголовок",
         "contentRequired": "Введите содержимое",
         "metaTitleRequired": "Введите SEO-заголовок",
+        "metaTitleTooLong": "SEO-заголовок длиннее 60 символов",
         "metaDescriptionRequired": "Введите SEO-описание",
+        "metaDescriptionTooLong": "SEO-описание длиннее 160 символов",
         "enIncomplete": "Заполните заголовок, содержимое и SEO-поля перевода"
       }
     },
@@ -296,10 +300,14 @@
     "close": "Закрыть уведомление"
   },
   "themeToggle": {
-    "label": "Переключить тему"
+    "label": "Переключить тему",
+    "change": "Тема",
+    "light": "Светлая",
+    "dark": "Тёмная"
   },
   "languageToggle": {
-    "label": "Переключить язык"
+    "label": "Переключить язык",
+    "change": "Язык"
   },
   "footer": {
     "categoriesLabel": "Категории",

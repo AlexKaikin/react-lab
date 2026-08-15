@@ -22,13 +22,14 @@ type DropdownProps = {
   children: ReactNode | ((api: DropdownChildrenApi) => ReactNode)
   panelRole?: PanelRole
   className?: string
+  matchTriggerWidth?: boolean
 }
 
-type Coords = { top: number; left: number }
+type Coords = { top: number; left: number; width?: number }
 
 const GAP = 8
 
-export const Dropdown = ({ trigger, children, panelRole = 'menu', className }: DropdownProps) => {
+export const Dropdown = ({ trigger, children, panelRole = 'menu', className, matchTriggerWidth }: DropdownProps) => {
   const [isMounted, setIsMounted] = useState(false)
   const [coords, setCoords] = useState<Coords | null>(null)
   const isClosingRef = useRef(false)
@@ -55,8 +56,8 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className }: D
     }
   }
 
-  useLayoutEffect(() => {
-    if (!isMounted || !panelRef.current || !rootRef.current) return
+  const updateCoords = useCallback(() => {
+    if (!panelRef.current || !rootRef.current) return
 
     const panelRect = panelRef.current.getBoundingClientRect()
     const rootRect = rootRef.current.getBoundingClientRect()
@@ -66,9 +67,27 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className }: D
 
     setCoords({
       top: fitsBelow ? rootRect.bottom + GAP : rootRect.top - panelRect.height - GAP,
-      left: fitsRight ? rootRect.right - panelRect.width : rootRect.left,
+      left: matchTriggerWidth ? rootRect.left : fitsRight ? rootRect.right - panelRect.width : rootRect.left,
+      width: matchTriggerWidth ? rootRect.width : undefined,
     })
-  }, [isMounted])
+  }, [matchTriggerWidth])
+
+  useLayoutEffect(() => {
+    if (!isMounted) return
+    updateCoords()
+  }, [isMounted, updateCoords])
+
+  useEffect(() => {
+    if (!isMounted) return
+
+    window.addEventListener('resize', updateCoords)
+    window.addEventListener('scroll', updateCoords, { capture: true, passive: true })
+
+    return () => {
+      window.removeEventListener('resize', updateCoords)
+      window.removeEventListener('scroll', updateCoords, { capture: true })
+    }
+  }, [isMounted, updateCoords])
 
   useEffect(() => {
     if (!isMounted) return
@@ -103,7 +122,12 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className }: D
         createPortal(
           <div
             ref={panelRef}
-            style={{ top: coords?.top ?? 0, left: coords?.left ?? 0, visibility: coords ? 'visible' : 'hidden' }}
+            style={{
+              top: coords?.top ?? 0,
+              left: coords?.left ?? 0,
+              width: coords?.width,
+              visibility: coords ? 'visible' : 'hidden',
+            }}
             className="fixed z-modal"
           >
             <div className={animationClassName} onTransitionEnd={handleTransitionEnd}>

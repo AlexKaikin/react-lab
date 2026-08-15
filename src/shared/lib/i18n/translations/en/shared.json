@@ -38,7 +38,8 @@
   "menu": {
     "label": "Menu",
     "home": "Home",
-    "blog": "Blog"
+    "blog": "Blog",
+    "settings": "Settings"
   },
   "confirm": {
     "label": "Confirm",
@@ -251,6 +252,7 @@
       "categoryPlaceholder": "Select a category",
       "titlePlaceholder": "Title",
       "tagsPlaceholder": "Tags, comma-separated",
+      "seoSection": "SEO",
       "metaTitlePlaceholder": "SEO title",
       "metaDescriptionPlaceholder": "SEO description",
       "metaImagePlaceholder": "Image URL",
@@ -262,7 +264,9 @@
         "titleRequired": "Enter a title",
         "contentRequired": "Enter the content",
         "metaTitleRequired": "Enter an SEO title",
+        "metaTitleTooLong": "SEO title is longer than 60 characters",
         "metaDescriptionRequired": "Enter an SEO description",
+        "metaDescriptionTooLong": "SEO description is longer than 160 characters",
         "enIncomplete": "Fill in the translation's title, content and SEO fields"
       }
     },
@@ -296,10 +300,14 @@
     "close": "Close notification"
   },
   "themeToggle": {
-    "label": "Toggle theme"
+    "label": "Toggle theme",
+    "change": "Theme",
+    "light": "Light",
+    "dark": "Dark"
   },
   "languageToggle": {
-    "label": "Switch language"
+    "label": "Switch language",
+    "change": "Language"
   },
   "footer": {
     "categoriesLabel": "Categories",

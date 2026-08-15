@@ -1,9 +1,12 @@
 import { z } from 'zod'
 import { defaultLocale, type Locale, locales } from '@/shared/lib/i18n'
 
+const META_TITLE_MAX_LENGTH = 60
+const META_DESCRIPTION_MAX_LENGTH = 160
+
 const metaSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
+  title: z.string().min(1).max(META_TITLE_MAX_LENGTH),
+  description: z.string().min(1).max(META_DESCRIPTION_MAX_LENGTH),
   image: z.url().nullable().default(null),
 })
 

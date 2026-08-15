@@ -4,10 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm, useFormContext, useWatch } from 'react-hook-form'
 import type { PostLocaleInput } from '@/entities/post'
 import { defaultLocale, type Locale, locales } from '@/shared/lib/i18n'
 import { Button } from '@/shared/ui/button'
+import { Divider } from '@/shared/ui/divider'
 import { Form } from '@/shared/ui/form/form'
 import { FormInput } from '@/shared/ui/form/form-input'
 import { FormSelect } from '@/shared/ui/form/form-select'
@@ -16,7 +17,12 @@ import { TabPanel, Tabs } from '@/shared/ui/tabs'
 import { useToastStore } from '@/shared/ui/toast'
 import { createPostAction } from '../api/create-post-action'
 import { updatePostAction } from '../api/update-post-action'
-import { type PostEditorFormValues, postEditorSchema } from '../model/post-editor-schema'
+import {
+  META_DESCRIPTION_MAX_LENGTH,
+  META_TITLE_MAX_LENGTH,
+  type PostEditorFormValues,
+  postEditorSchema,
+} from '../model/post-editor-schema'
 
 const orderedLocales: Locale[] = [defaultLocale, ...locales.filter((loc) => loc !== defaultLocale)]
 
@@ -61,6 +67,9 @@ type LocaleFieldsProps = { locale: Locale }
 
 const LocaleFields = ({ locale }: LocaleFieldsProps) => {
   const t = useTranslations()
+  const { control } = useFormContext<PostEditorFormValues>()
+  const metaTitle = useWatch({ control, name: `${locale}.meta.title` })
+  const metaDescription = useWatch({ control, name: `${locale}.meta.description` })
 
   return (
     <>
@@ -70,13 +79,18 @@ const LocaleFields = ({ locale }: LocaleFieldsProps) => {
       />
       <MarkdownEditor<PostEditorFormValues> name={`${locale}.content`} />
       <FormInput<PostEditorFormValues> name={`${locale}.tags`} placeholder={t('shared.admin.posts.tagsPlaceholder')} />
+
+      <Divider textAlign="left" className="mt-2">
+        {t('shared.admin.posts.seoSection')}
+      </Divider>
+
       <FormInput<PostEditorFormValues>
         name={`${locale}.meta.title`}
-        placeholder={t('shared.admin.posts.metaTitlePlaceholder')}
+        label={`${t('shared.admin.posts.metaTitlePlaceholder')} (${metaTitle.length}/${META_TITLE_MAX_LENGTH})`}
       />
       <FormInput<PostEditorFormValues>
         name={`${locale}.meta.description`}
-        placeholder={t('shared.admin.posts.metaDescriptionPlaceholder')}
+        label={`${t('shared.admin.posts.metaDescriptionPlaceholder')} (${metaDescription.length}/${META_DESCRIPTION_MAX_LENGTH})`}
       />
       <FormInput<PostEditorFormValues>
         name={`${locale}.meta.image`}

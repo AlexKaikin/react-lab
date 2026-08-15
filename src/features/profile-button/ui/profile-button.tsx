@@ -15,7 +15,9 @@ export const ProfileButton = () => {
   const { data: session, status } = useSession()
   const { openModal } = useModalStore()
 
-  if (status === 'loading') return null
+  if (status === 'loading') {
+    return <div className="size-12 rounded-full bg-secondary animate-pulse" aria-hidden="true" />
+  }
 
   return (
     <Dropdown

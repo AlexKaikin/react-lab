@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import type { ComponentProps, FC } from 'react'
+import { getCategories } from '@/entities/post-category'
 import { LanguageToggle } from '@/features/language-toggle'
 import { MenuButton } from '@/features/menu-button'
 import { ProfileButton } from '@/features/profile-button'
@@ -12,11 +13,12 @@ type HeaderProps = ComponentProps<'div'> & { locale: Locale }
 
 export const Header: FC<HeaderProps> = async ({ className, locale }) => {
   const t = await getTranslations({ locale, namespace: 'shared.header' })
+  const categories = await getCategories(locale)
 
   return (
     <header className={classNames('flex items-center', className)}>
       <div className="flex-1 flex items-center gap-2 uppercase font-bold">
-        <MenuButton />
+        <MenuButton categories={categories} />
         {t('title')}
       </div>
       <SearchButton />

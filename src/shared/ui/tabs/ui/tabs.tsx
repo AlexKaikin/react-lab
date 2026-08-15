@@ -1,7 +1,8 @@
 'use client'
 
-import type { KeyboardEvent } from 'react'
+import { type KeyboardEvent, useLayoutEffect, useRef, useState } from 'react'
 import { classNames } from '@/shared/lib/class-names'
+import { VARIANT_COLOR_STYLE } from '@/shared/lib/variant-style'
 import type { TButtonSize } from '@/shared/ui/button/model/schema'
 
 const tabId = (value: string) => `tab-${value}`
@@ -33,7 +34,19 @@ type TabsProps = {
   className?: string
 }
 
+type IndicatorRect = { left: number; width: number }
+
 export const Tabs = ({ items, value, onChange, label, size = 'medium', className }: TabsProps) => {
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+  const [indicator, setIndicator] = useState<IndicatorRect | null>(null)
+
+  useLayoutEffect(() => {
+    const tab = tabRefs.current[value]
+    if (!tab) return
+
+    setIndicator({ left: tab.offsetLeft, width: tab.offsetWidth })
+  }, [value])
+
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
     e.preventDefault()
@@ -50,17 +63,31 @@ export const Tabs = ({ items, value, onChange, label, size = 'medium', className
       role="tablist"
       aria-label={label}
       className={classNames(
-        'inline-flex w-fit items-center gap-1 rounded-md border border-secondary bg-primary/20 backdrop-blur-sm p-1',
+        'relative inline-flex w-fit items-center gap-1 rounded-md border border-secondary bg-primary/20 backdrop-blur-sm p-1',
         TRACK_SIZE_STYLE[size],
         className,
       )}
     >
+      {indicator && (
+        <div
+          className={classNames(
+            'absolute inset-y-1 rounded-md transition-[left,width] duration-200 ease-out',
+            VARIANT_COLOR_STYLE.contained.primary,
+          )}
+          style={{ left: indicator.left, width: indicator.width }}
+          aria-hidden="true"
+        />
+      )}
+
       {items.map((item, index) => {
         const selected = item.value === value
 
         return (
           <button
             key={item.value}
+            ref={(el) => {
+              tabRefs.current[item.value] = el
+            }}
             id={tabId(item.value)}
             type="button"
             role="tab"
@@ -70,9 +97,9 @@ export const Tabs = ({ items, value, onChange, label, size = 'medium', className
             onClick={() => onChange(item.value)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={classNames(
-              'cursor-pointer rounded-md transition-colors',
+              'relative cursor-pointer rounded-md transition-colors',
               TAB_SIZE_STYLE[size],
-              selected ? 'bg-primary text-primary' : 'text-secondary hover:text-primary',
+              selected ? 'text-semantic-primary-foreground' : 'text-secondary hover:text-primary',
             )}
           >
             {item.label}

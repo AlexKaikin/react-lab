@@ -121,7 +121,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
   "isActive": true,
   "ru": {
     "title": "Как работает useEffect под капотом",
-    "content": "# ...markdown...",
+    "content": "...markdown, без своего заголовка 1 уровня...",
     "tags": ["react", "hooks", "useeffect"],
     "meta": { "title": "...", "description": "...", "image": null }
   },
@@ -143,7 +143,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
   "categoryId": "1edcf279-25e6-4a8c-9af3-cd23a1178f2a",
   "ru": {
     "title": "Как работает useEffect под капотом",
-    "content": "# Заголовок\n\nМаркдаун-текст поста.",
+    "content": "Вводный абзац.\n\n## Подзаголовок\n\nМаркдаун-текст поста.",
     "tags": ["react", "hooks"],
     "meta": {
       "title": "SEO-заголовок",
@@ -153,7 +153,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
   },
   "en": {
     "title": "How useEffect works under the hood",
-    "content": "# Heading\n\nMarkdown body.",
+    "content": "Intro paragraph.\n\n## Subheading\n\nMarkdown body.",
     "tags": ["react", "hooks"],
     "meta": { "title": "...", "description": "...", "image": null }
   }
@@ -165,10 +165,10 @@ Authorization: Bearer <CONTENT_API_SECRET>
 | `slug`                | `string`         | да          | `^[a-z0-9-]+$`, должен быть уникален                |
 | `categoryId`          | `string`         | да          | id существующей категории                           |
 | `ru.title`            | `string`         | да          | непустая строка                                     |
-| `ru.content`          | `string`         | да          | markdown, непустая строка                            |
+| `ru.content`          | `string`         | да          | markdown, непустая строка. **Не добавляйте заголовок 1 уровня (`# ...`)** — заголовок `<h1>` страница уже строит из `title`, свой `#` в контенте даст дублирующийся заголовок. Начинайте структуру контента с `##` и ниже |
 | `ru.tags`             | `string[]`       | нет         | по умолчанию `[]`                                    |
-| `ru.meta.title`       | `string`         | да          |                                                       |
-| `ru.meta.description` | `string`         | да          |                                                       |
+| `ru.meta.title`       | `string`         | да          | не длиннее 60 символов                               |
+| `ru.meta.description` | `string`         | да          | не длиннее 160 символов                              |
 | `ru.meta.image`       | `string \| null` | нет         | должен быть валидным URL, если передан               |
 | `en`                  | `object \| null` | нет         | опустить/`null`, если перевода нет; та же форма, что `ru` |
 

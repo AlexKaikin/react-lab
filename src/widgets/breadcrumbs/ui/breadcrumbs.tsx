@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { classNames } from '@/shared/lib/class-names'
 import { env } from '@/shared/lib/env'
 import type { Locale } from '@/shared/lib/i18n'
 import { LinkButton } from '@/shared/ui'
@@ -35,18 +36,18 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items, label, locale }) => (
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(items, locale)).replace(/</g, '\\u003c') }}
     />
-    <ol className="flex items-center gap-2 text-secondary">
+    <ol className="flex items-center gap-2 overflow-x-auto text-secondary">
       {items.map((item, index) => {
         const isLast = index === items.length - 1
 
         return (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
+          <li key={`${item.label}-${index}`} className="flex shrink-0 items-center gap-2">
             {item.href && !isLast ? (
-              <LinkButton href={item.href} variant="text">
+              <LinkButton href={item.href} variant="text" className="whitespace-nowrap">
                 {item.label}
               </LinkButton>
             ) : (
-              <span className={isLast ? 'font-medium opacity-100' : undefined}>{item.label}</span>
+              <span className={classNames('whitespace-nowrap', isLast && 'font-medium opacity-100')}>{item.label}</span>
             )}
             {!isLast && (
               <svg
