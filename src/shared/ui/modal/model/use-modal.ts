@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
+import { useScrollLock } from '@/shared/hooks/use-scroll-lock'
 import { type Animation, useAnimation } from '@/shared/ui/animation'
 import { useModalStore } from '@/shared/ui/modal/model/use-modal-store'
 
@@ -57,6 +58,8 @@ export const useModal = ({ animation }: Props) => {
     [handleClose],
   )
 
+  useScrollLock(true)
+
   useEffect(() => {
     if (shouldClose) handleClose()
   }, [shouldClose, handleClose])
@@ -65,14 +68,12 @@ export const useModal = ({ animation }: Props) => {
     const previouslyFocused = document.activeElement as HTMLElement | null
 
     document.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
     dialogRef.current?.focus()
 
     requestAnimationFrame(() => setIsAnimating(false))
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
       previouslyFocused?.focus()
     }
   }, [handleKeyDown, setIsAnimating])

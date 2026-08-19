@@ -80,14 +80,21 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
   useEffect(() => {
     if (!isMounted) return
 
+    const handleScroll = (e: Event) => {
+      const isPageScroll = e.target === document
+
+      if (isPageScroll) handleClose()
+      else updateCoords()
+    }
+
     window.addEventListener('resize', updateCoords)
-    window.addEventListener('scroll', updateCoords, { capture: true, passive: true })
+    window.addEventListener('scroll', handleScroll, { capture: true, passive: true })
 
     return () => {
       window.removeEventListener('resize', updateCoords)
-      window.removeEventListener('scroll', updateCoords, { capture: true })
+      window.removeEventListener('scroll', handleScroll, { capture: true })
     }
-  }, [isMounted, updateCoords])
+  }, [isMounted, updateCoords, handleClose])
 
   useEffect(() => {
     if (!isMounted) return

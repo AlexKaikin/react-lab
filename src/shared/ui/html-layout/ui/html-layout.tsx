@@ -8,7 +8,7 @@ type HtmlLayoutProps = {
 }
 
 export const HtmlLayout = ({ lang, children }: HtmlLayoutProps) => (
-  <html lang={lang} className={`${fontText.variable} ${fontHeading.variable} h-full`} suppressHydrationWarning>
-    <body className="min-h-full flex flex-col">{children}</body>
+  <html lang={lang} className={`${fontText.variable} ${fontHeading.variable}`} suppressHydrationWarning>
+    <body className="min-h-dvh flex flex-col pt-16">{children}</body>
   </html>
 )

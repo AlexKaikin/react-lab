@@ -32,7 +32,7 @@ export const getButtonStyle = ({ variant = 'contained', size = 'medium', color, 
 
   if (variant === 'contained') styles.push('hover:opacity-90 active:opacity-80')
   if (variant === 'outlined') styles.push('hover:bg-current/10 active:bg-current/15')
-  if (variant === 'text') styles.push('hover:opacity-70 active:opacity-50')
+  if (variant === 'text') styles.push('hover:opacity-70 active:opacity-50 w-fit justify-start')
 
   styles.push(TEXT_SIZE_STYLE[size])
 

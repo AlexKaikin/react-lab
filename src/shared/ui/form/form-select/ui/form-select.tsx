@@ -1,10 +1,8 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import type { ComponentProps } from 'react'
 import { type FieldValues, type Path, useController, useFormContext } from 'react-hook-form'
-import { Collapse } from '@/shared/ui/collapse'
-import { FieldError } from '@/shared/ui/form/field-error'
+import { FormField, useFieldId } from '@/shared/ui/form/form-field'
 import { Select } from '@/shared/ui/form/select'
 
 type FormSelectProps<TFieldValues extends FieldValues> = Omit<
@@ -12,22 +10,31 @@ type FormSelectProps<TFieldValues extends FieldValues> = Omit<
   'name' | 'value' | 'onChange'
 > & {
   name: Path<TFieldValues>
+  label?: string
 }
 
-export const FormSelect = <TFieldValues extends FieldValues>({ name, ...rest }: FormSelectProps<TFieldValues>) => {
-  const t = useTranslations()
+export const FormSelect = <TFieldValues extends FieldValues>(props: FormSelectProps<TFieldValues>) => {
+  const { name, label, id, ...rest } = props
+  const fieldId = useFieldId(id)
+  const errorId = `${fieldId}-error`
   const { control } = useFormContext<TFieldValues>()
   const {
     field,
     fieldState: { error },
   } = useController({ name, control })
+  const message = error?.message
 
   return (
-    <div className="flex flex-col">
-      <Select {...rest} name={field.name} value={field.value ?? ''} onChange={field.onChange} />
-      <Collapse isVisible={!!error} gapClassName="pt-2">
-        {error?.message && <FieldError message={t(error.message as Parameters<typeof t>[0])} />}
-      </Collapse>
-    </div>
+    <FormField id={fieldId} errorId={errorId} label={label} error={message}>
+      <Select
+        {...rest}
+        id={fieldId}
+        aria-invalid={!!message}
+        aria-describedby={message && errorId}
+        name={field.name}
+        value={field.value ?? ''}
+        onChange={field.onChange}
+      />
+    </FormField>
   )
 }

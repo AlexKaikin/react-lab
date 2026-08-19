@@ -1,33 +1,40 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useTranslations } from 'next-intl'
 import { type FieldValues, type Path, useController, useFormContext } from 'react-hook-form'
 import { useTheme } from '@/shared/lib/theme'
-import { Collapse } from '@/shared/ui/collapse'
-import { FieldError } from '@/shared/ui/form/field-error'
+import { FormField, useFieldId } from '@/shared/ui/form/form-field'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 type MarkdownEditorProps<TFieldValues extends FieldValues> = {
   name: Path<TFieldValues>
+  label?: string
+  id?: string
 }
 
-export const MarkdownEditor = <TFieldValues extends FieldValues>({ name }: MarkdownEditorProps<TFieldValues>) => {
-  const t = useTranslations()
+export const MarkdownEditor = <TFieldValues extends FieldValues>(props: MarkdownEditorProps<TFieldValues>) => {
+  const { name, label, id } = props
+  const fieldId = useFieldId(id)
+  const errorId = `${fieldId}-error`
   const theme = useTheme((state) => state.theme)
   const { control } = useFormContext<TFieldValues>()
   const {
     field,
     fieldState: { error },
   } = useController({ name, control })
+  const message = error?.message
 
   return (
-    <div className="flex flex-col" data-color-mode={theme ?? 'dark'}>
-      <MDEditor value={field.value ?? ''} onChange={(value) => field.onChange(value ?? '')} height={320} />
-      <Collapse isVisible={!!error} gapClassName="pt-2">
-        {error?.message && <FieldError message={t(error.message as Parameters<typeof t>[0])} />}
-      </Collapse>
-    </div>
+    <FormField id={fieldId} errorId={errorId} label={label} error={message}>
+      <div data-color-mode={theme ?? 'dark'}>
+        <MDEditor
+          value={field.value ?? ''}
+          onChange={(value) => field.onChange(value ?? '')}
+          height={320}
+          textareaProps={{ id: fieldId, 'aria-invalid': !!message, 'aria-describedby': message && errorId }}
+        />
+      </div>
+    </FormField>
   )
 }

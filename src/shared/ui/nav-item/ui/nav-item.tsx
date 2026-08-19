@@ -20,7 +20,7 @@ export const NavItem = ({ label, href, children }: NavItemProps) => {
   return (
     <div className="flex flex-col">
       <div className="flex min-h-10 items-center gap-2">
-        <div className="flex-1 *:w-full *:justify-start">
+        <div className="flex-1 *:w-full">
           {href ? (
             <LinkButton href={href} variant="text" color="primary">
               {label}

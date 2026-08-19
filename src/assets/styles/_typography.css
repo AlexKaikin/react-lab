@@ -38,7 +38,7 @@
     @apply text-sm;
   }
 
-  /* Tablet (md: 768px+) */
+  /* Tablet (t: 768px+) */
   @media (min-width: 768px) {
     h1 {
       @apply text-4xl;
@@ -60,7 +60,7 @@
     }
   }
 
-  /* Desktop (lg: 1024px+) */
+  /* Desktop (d: 1024px+) */
   @media (min-width: 1024px) {
     h1 {
       @apply text-5xl;
@@ -87,42 +87,42 @@
   /* Визуальные размеры заголовков как самостоятельные классы —
      позволяют выбирать тег по семантике документа, а размер отдельно. */
   .h1 {
-    @apply font-bold tracking-tight text-3xl md:text-4xl lg:text-5xl;
+    @apply font-bold tracking-tight text-3xl t:text-4xl d:text-5xl;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
   .h2 {
-    @apply font-semibold tracking-tight text-2xl md:text-3xl lg:text-4xl;
+    @apply font-semibold tracking-tight text-2xl t:text-3xl d:text-4xl;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
   .h3 {
-    @apply font-semibold text-xl md:text-2xl lg:text-3xl;
+    @apply font-semibold text-xl t:text-2xl d:text-3xl;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
   .h4 {
-    @apply font-semibold text-lg md:text-xl lg:text-2xl;
+    @apply font-semibold text-lg t:text-xl d:text-2xl;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
   .h5 {
-    @apply font-medium text-base md:text-lg lg:text-xl;
+    @apply font-medium text-base t:text-lg d:text-xl;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
   .h6 {
-    @apply font-medium text-sm md:text-base lg:text-lg;
+    @apply font-medium text-sm t:text-base d:text-lg;
     font-family: var(--font-heading);
     line-height: 1.2;
   }
 
   .t1 {
-    @apply text-sm md:text-base;
+    @apply text-sm t:text-base;
     line-height: 1.6;
   }
   .t2 {
-    @apply text-xs md:text-sm;
+    @apply text-xs t:text-sm;
     line-height: 1.4;
   }
   .t3 {

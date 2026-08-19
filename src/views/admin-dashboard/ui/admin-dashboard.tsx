@@ -16,7 +16,7 @@ export const AdminDashboardPage = async ({ params }: LocalePageProps<'/[locale]/
   return (
     <div className="container flex flex-col gap-4 animate-fade-in">
       <h1>{t('label')}</h1>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 t:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="paper flex flex-col gap-1 p-4">
             <span className="text-secondary text-[14px]">{stat.label}</span>

@@ -11,7 +11,7 @@ export const LanguageToggle = () => {
   const { locale, locales, switchLocale } = useLocaleSwitch()
 
   return (
-    <div className="hidden sm:block">
+    <div className="hidden t:block">
       <Dropdown
         trigger={(triggerProps) => (
           <Button aria-label={t('shared.languageToggle.label')} shape="square" {...triggerProps}>
@@ -19,7 +19,7 @@ export const LanguageToggle = () => {
           </Button>
         )}
       >
-        <div className="flex flex-col gap-1 *:justify-start *:px-3 *:py-2">
+        <div className="flex flex-col gap-1 *:w-full *:px-3 *:py-2">
           {locales.map((item) => (
             <Button
               key={item}

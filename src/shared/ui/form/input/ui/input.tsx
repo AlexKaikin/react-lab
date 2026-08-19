@@ -2,15 +2,19 @@ import { type ComponentProps, forwardRef, type ReactNode } from 'react'
 import { classNames } from '@/shared/lib/class-names'
 
 type InputProps = ComponentProps<'input'> & {
+  startSlot?: ReactNode
   endSlot?: ReactNode
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, endSlot, ...rest }, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { className, startSlot, endSlot, ...rest } = props
+
   const input = (
     <input
       ref={ref}
       className={classNames(
         'w-full h-12 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors placeholder:text-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30',
+        !!startSlot && 'pl-12',
         !!endSlot && 'pr-12',
         className,
       )}
@@ -18,12 +22,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, endS
     />
   )
 
-  if (!endSlot) return input
+  if (!startSlot && !endSlot) return input
 
   return (
     <div className="relative">
+      {startSlot && (
+        <div className="absolute inset-y-0 left-0 z-10 flex w-12 items-center justify-center">{startSlot}</div>
+      )}
       {input}
-      <div className="-translate-y-1/2 absolute top-1/2 right-1">{endSlot}</div>
+      {endSlot && (
+        <div className="absolute inset-y-0 right-0 z-10 flex w-12 items-center justify-center">{endSlot}</div>
+      )}
     </div>
   )
 })

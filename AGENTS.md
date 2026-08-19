@@ -4,6 +4,15 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+## Локальные навыки
+
+Перед началом соответствующей работы обязательно прочитать инструкции целиком:
+
+- Новая фича или крупная задача: [`dev-workflow`](./.claude/skills/dev-workflow/SKILL.md).
+  Проходить этапы последовательно и запрашивать подтверждение пользователя перед переходом к следующему.
+- Ревью диффа или PR: [`project-review`](./.claude/skills/project-review/SKILL.md).
+  Использовать его чек-лист полностью.
+
 # Стек
 
 - Next.js 16, React 19, TypeScript, Tailwind CSS 4

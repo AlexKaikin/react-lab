@@ -10,7 +10,7 @@ import { useModalStore } from '@/shared/ui/modal'
 import { useToastStore } from '@/shared/ui/toast'
 import { deletePostAction } from '../api/delete-post-action'
 
-const ConfirmModal = lazy(() => import('@/shared/ui/confirm-modal/ui/confirm-modal'))
+const ConfirmModal = lazy(() => import('@/shared/ui/confirm-modal'))
 
 type PostListItem = {
   id: string
@@ -66,7 +66,7 @@ export const PostList = ({ posts }: { posts: PostListItem[] }) => {
               </Button>
             )}
           >
-            <div className="flex flex-col gap-1 *:justify-start *:px-3 *:py-2">
+            <div className="flex flex-col gap-1 *:w-full *:px-3 *:py-2">
               <LinkButton href={`/admin/blog/posts/${post.slug}/edit`} variant="text" color="secondary">
                 {t('shared.admin.posts.edit')}
               </LinkButton>

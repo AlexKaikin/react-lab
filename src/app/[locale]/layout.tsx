@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/features/theme'
 import { SessionProvider } from '@/shared/api/auth/session-provider'
 import { locales } from '@/shared/lib/i18n'
 import { HtmlLayout } from '@/shared/ui/html-layout'
+import { LenisProvider } from '@/shared/ui/lenis-provider'
 import { ModalProvider } from '@/shared/ui/modal'
 import { ToastProvider } from '@/shared/ui/toast'
 import { Footer } from '@/widgets/footer'
@@ -25,17 +26,22 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
 
   return (
     <HtmlLayout lang={locale}>
-      <ThemeProvider>
-        <NextIntlClientProvider messages={messages}>
-          <SessionProvider>
-            <Header className="py-4" locale={locale} />
-            <main className="flex grow flex-col relative py-4">{children}</main>
-            <Footer locale={locale} />
-            <ModalProvider />
-            <ToastProvider />
-          </SessionProvider>
-        </NextIntlClientProvider>
-      </ThemeProvider>
+      <LenisProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <SessionProvider>
+              <Header
+                className="fixed inset-x-0 top-0 z-20 container h-16 border-b border-secondary bg-secondary/80 backdrop-blur-sm"
+                locale={locale}
+              />
+              <main className="flex grow flex-col relative py-4">{children}</main>
+              <Footer locale={locale} />
+              <ModalProvider />
+              <ToastProvider />
+            </SessionProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
+      </LenisProvider>
     </HtmlLayout>
   )
 }

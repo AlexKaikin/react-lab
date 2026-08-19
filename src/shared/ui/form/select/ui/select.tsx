@@ -19,6 +19,8 @@ type SelectProps = {
   id?: string
   name?: string
   className?: string
+  'aria-invalid'?: boolean
+  'aria-describedby'?: string
 }
 
 type SelectListboxProps = {
@@ -105,7 +107,8 @@ const SelectListbox = ({ listboxId, options, value, onChange, close }: SelectLis
   )
 }
 
-export const Select = ({ options, value, onChange, placeholder, id, name, className }: SelectProps) => {
+export const Select = (props: SelectProps) => {
+  const { options, value, onChange, placeholder, id, name, className } = props
   const listboxId = useId()
   const selectedOption = options.find((option) => option.value === value)
 
@@ -118,6 +121,8 @@ export const Select = ({ options, value, onChange, placeholder, id, name, classN
           type="button"
           id={id}
           name={name}
+          aria-invalid={props['aria-invalid']}
+          aria-describedby={props['aria-describedby']}
           className={classNames(
             'flex h-12 w-full items-center justify-between gap-2 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30',
             className,

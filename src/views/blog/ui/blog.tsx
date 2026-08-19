@@ -35,7 +35,7 @@ export const BlogPage = async (props: BlogPageProps) => {
     <div className="container flex flex-col gap-4 animate-fade-in">
       <Breadcrumbs items={breadcrumbs} label={t('shared.breadcrumbs.label')} locale={locale} />
       <h1 className="text-2xl font-bold">{title}</h1>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 t:grid-cols-2 d:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}

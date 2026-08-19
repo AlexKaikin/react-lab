@@ -25,6 +25,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({ categories }) => {
   const prevPathname = useRef(pathname)
   const t = useTranslations()
   const closeModal = useModalStore((state) => state.closeModal)
+  const cleaningModalItems = useModalStore((state) => state.cleaningModalItems)
   const { locale, locales, switchLocale } = useLocaleSwitch()
   const { theme, setTheme } = useTheme()
 
@@ -65,7 +66,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({ categories }) => {
               color={item === locale ? 'primary' : 'secondary'}
               className="w-full justify-start"
               onClick={() => {
-                closeModal()
+                cleaningModalItems()
                 switchLocale(item)
               }}
             >

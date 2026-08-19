@@ -92,7 +92,7 @@ export const CategoryList = ({ categories }: { categories: CategoryListItem[] })
                   </Button>
                 )}
               >
-                <div className="flex flex-col gap-1 *:justify-start *:px-3 *:py-2">
+                <div className="flex flex-col gap-1 *:w-full *:px-3 *:py-2">
                   <Button variant="text" color="secondary" onClick={() => handleEdit(category)}>
                     {t('shared.admin.categories.edit')}
                   </Button>

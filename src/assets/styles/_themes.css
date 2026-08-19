@@ -2,13 +2,14 @@
   --radius: 10px;
 
   /* Семантические цвета (светлая/тёмная вариации на случай необходимости) */
-  /* primary/secondary — инвертирующаяся пара «чернила/бумага»: контраст держится в обеих темах сам собой */
+  /* primary — инвертирующаяся пара «чернила/бумага»: контраст держится в обеих темах сам собой */
   --semantic-primary-light: var(--color-neutral-50); /* почти белый — фон акцентной кнопки на тёмном фоне */
   --semantic-primary-dark: var(--color-neutral-950); /* почти чёрный — фон акцентной кнопки на светлом фоне */
   --semantic-primary-foreground-light: var(--color-neutral-950); /* текст на белом фоне акцентной кнопки */
   --semantic-primary-foreground-dark: var(--color-neutral-50); /* текст на чёрном фоне акцентной кнопки */
-  --semantic-secondary-light: var(--color-neutral-50); /* почти белый, контраст на тёмном фоне */
-  --semantic-secondary-dark: var(--color-neutral-300); /* заметен на светлом фоне */
+  --semantic-secondary-light: var(--color-neutral-600); /* серый фон второстепенной кнопки на тёмном фоне */
+  --semantic-secondary-dark: var(--color-neutral-800); /* серый фон второстепенной кнопки на светлом фоне */
+  --semantic-secondary-foreground: var(--color-neutral-50); /* белый текст читается на обоих оттенках серого */
   --semantic-info-light: #2563eb; /* blue-600 */
   --semantic-info-dark: #1e40af; /* blue-800 */
   --semantic-error-light: #dc2626; /* red-600 */
@@ -74,6 +75,7 @@
   --color-semantic-primary: var(--semantic-primary); /* ← Добавь эту строку */
   --color-semantic-primary-foreground: var(--semantic-primary-foreground);
   --color-semantic-secondary: var(--semantic-secondary);
+  --color-semantic-secondary-foreground: var(--semantic-secondary-foreground);
   --color-semantic-info: var(--semantic-info);
   --color-semantic-error: var(--semantic-error);
   --color-semantic-warning: var(--semantic-warning);
@@ -97,6 +99,15 @@
   --radius-sm: calc(var(--radius) / 2);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) * 2);
+
+  /* Брейкпоинты: база — телефон, t — планшет, d — десктоп. Шкала Tailwind погашена */
+  --breakpoint-sm: initial;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+  --breakpoint-t: 768px;
+  --breakpoint-d: 1024px;
 }
 
 @layer utilities {
@@ -112,10 +123,18 @@
     z-index: 60;
   }
 
+  /* Боковые отступы контейнера страницы */
   .container {
     max-width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-inline: 16px;
+
+    @media (width >= 768px) {
+      padding-inline: 24px;
+    }
+
+    @media (width >= 1024px) {
+      padding-inline: 32px;
+    }
   }
 
   .paper {

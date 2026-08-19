@@ -1,35 +1,33 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
-import { type ComponentProps, useEffect, useState } from 'react'
+import type { ComponentProps } from 'react'
 import { type FieldValues, type Path, useFormContext } from 'react-hook-form'
-import { Collapse } from '@/shared/ui/collapse'
 import { Checkbox } from '@/shared/ui/form/checkbox'
-import { FieldError } from '@/shared/ui/form/field-error'
+import { FormField, useFieldId } from '@/shared/ui/form/form-field'
 
 type FormCheckboxProps<TFieldValues extends FieldValues> = Omit<ComponentProps<typeof Checkbox>, 'name'> & {
   name: Path<TFieldValues>
 }
 
-export const FormCheckbox = <TFieldValues extends FieldValues>({ name, ...rest }: FormCheckboxProps<TFieldValues>) => {
-  const t = useTranslations()
+export const FormCheckbox = <TFieldValues extends FieldValues>(props: FormCheckboxProps<TFieldValues>) => {
+  const { name, id, ...rest } = props
+  const fieldId = useFieldId(id)
+  const errorId = `${fieldId}-error`
   const {
     register,
     formState: { errors },
   } = useFormContext<TFieldValues>()
-  const messageKey = errors[name]?.message as string | undefined
-  const [lastMessageKey, setLastMessageKey] = useState(messageKey)
-
-  useEffect(() => {
-    if (messageKey) setLastMessageKey(messageKey)
-  }, [messageKey])
+  const message = errors[name]?.message as string | undefined
 
   return (
-    <div className="flex flex-col">
-      <Checkbox {...register(name)} {...rest} />
-      <Collapse isVisible={!!messageKey} gapClassName="pt-2">
-        {lastMessageKey && <FieldError message={t(lastMessageKey as Parameters<typeof t>[0])} />}
-      </Collapse>
-    </div>
+    <FormField errorId={errorId} error={message}>
+      <Checkbox
+        id={fieldId}
+        aria-invalid={!!message}
+        aria-describedby={message && errorId}
+        {...register(name)}
+        {...rest}
+      />
+    </FormField>
   )
 }

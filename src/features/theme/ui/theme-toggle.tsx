@@ -11,7 +11,7 @@ export const ThemeToggle = () => {
 
   if (theme === null) {
     return (
-      <div className="hidden sm:block">
+      <div className="hidden t:block">
         <div className="size-12 rounded-full bg-secondary animate-pulse" aria-hidden="true" />
       </div>
     )
@@ -20,7 +20,7 @@ export const ThemeToggle = () => {
   const isDark = theme !== THEME.LIGHT
 
   return (
-    <div className="hidden sm:block">
+    <div className="hidden t:block">
       <Button
         aria-label={t('label')}
         shape="square"

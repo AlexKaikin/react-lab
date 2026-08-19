@@ -4,7 +4,7 @@ import { getTopTags } from '@/entities/post'
 import { getCategories } from '@/entities/post-category'
 import { classNames } from '@/shared/lib/class-names'
 import type { Locale } from '@/shared/lib/i18n'
-import { Link } from '@/shared/lib/i18n/navigation'
+import { LinkButton } from '@/shared/ui'
 
 const TAGS_LIMIT = 10
 
@@ -17,35 +17,36 @@ export const Footer: FC<FooterProps> = async ({ className, locale }) => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className={classNames('border-t border-primary', className)}>
+    <footer className={classNames('border-t border-secondary', className)}>
       <div className="container flex flex-col gap-8 py-10">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-12">
+        <div className="grid grid-cols-2 gap-8 t:grid-cols-4 t:gap-12">
           <div className="flex flex-col gap-4">
             <span className="font-bold text-lg uppercase">{t('shared.header.title')}</span>
             <nav className="flex flex-col gap-2">
-              <Link href="/" className="text-secondary text-sm hover:text-primary">
+              <LinkButton href="/" variant="text" color="secondary">
                 {t('shared.menu.home')}
-              </Link>
-              <Link href="/blog" className="text-secondary text-sm hover:text-primary">
+              </LinkButton>
+              <LinkButton href="/blog" variant="text" color="secondary">
                 {t('shared.menu.blog')}
-              </Link>
+              </LinkButton>
             </nav>
           </div>
 
           {categories.length > 0 && (
             <div className="flex flex-col gap-4">
-              <span className="text-secondary text-sm uppercase tracking-wide">
+              <span className="text-primary text-sm uppercase font-bold tracking-wide">
                 {t('shared.footer.categoriesLabel')}
               </span>
               <nav className="flex flex-col gap-2">
                 {categories.map((category) => (
-                  <Link
+                  <LinkButton
                     key={category.id}
                     href={`/blog/category/${category.slug}`}
-                    className="text-secondary text-sm hover:text-primary"
+                    variant="text"
+                    color="secondary"
                   >
                     {category.name}
-                  </Link>
+                  </LinkButton>
                 ))}
               </nav>
             </div>
@@ -53,26 +54,30 @@ export const Footer: FC<FooterProps> = async ({ className, locale }) => {
 
           {tags.length > 0 && (
             <div className="flex flex-col gap-4">
-              <span className="text-secondary text-sm uppercase tracking-wide">{t('shared.footer.tagsLabel')}</span>
+              <span className="text-primary font-bold text-sm uppercase tracking-wide">
+                {t('shared.footer.tagsLabel')}
+              </span>
               <nav className="flex flex-col gap-2">
                 {tags.map((tag) => (
-                  <Link key={tag} href={`/blog/tag/${tag}`} className="text-secondary text-sm hover:text-primary">
+                  <LinkButton key={tag} href={`/blog/tag/${tag}`} variant="text" color="secondary">
                     {tag}
-                  </Link>
+                  </LinkButton>
                 ))}
               </nav>
             </div>
           )}
 
           <div className="flex flex-col gap-4">
-            <span className="text-secondary text-sm uppercase tracking-wide">{t('shared.footer.legalLabel')}</span>
+            <span className="text-primary font-bold text-sm uppercase tracking-wide">
+              {t('shared.footer.legalLabel')}
+            </span>
             <nav className="flex flex-col gap-2">
-              <Link href="/terms" className="text-secondary text-sm hover:text-primary">
+              <LinkButton href="/terms" variant="text" color="secondary">
                 {t('shared.legal.terms.label')}
-              </Link>
-              <Link href="/privacy" className="text-secondary text-sm hover:text-primary">
+              </LinkButton>
+              <LinkButton href="/privacy" variant="text" color="secondary">
                 {t('shared.legal.privacy.label')}
-              </Link>
+              </LinkButton>
             </nav>
           </div>
         </div>
