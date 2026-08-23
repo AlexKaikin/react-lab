@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { POST_ACCESS_LEVEL } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
@@ -30,6 +31,7 @@ type PostFormInitial = {
   id: string
   slug: string
   categoryId: string
+  accessLevel: POST_ACCESS_LEVEL
 } & Record<Locale, PostLocaleInput | null>
 
 type PostFormCategory = {
@@ -57,6 +59,7 @@ const buildLocaleDefaultValues = (locale?: PostLocaleInput | null): PostEditorFo
 const buildDefaultValues = (initialPost?: PostFormInitial): PostEditorFormValues => ({
   slug: initialPost?.slug ?? '',
   categoryId: initialPost?.categoryId ?? '',
+  accessLevel: initialPost?.accessLevel ?? 'FREE',
   ...(Object.fromEntries(locales.map((loc) => [loc, buildLocaleDefaultValues(initialPost?.[loc])])) as Record<
     Locale,
     PostEditorFormValues['ru']
@@ -122,6 +125,11 @@ export const PostForm = ({ categories, initialPost }: PostFormProps) => {
     defaultLocale,
   ]
   const visibleLocales = orderedLocales.filter((loc) => categoryLocales.includes(loc))
+  const accessLevelOptions = [
+    { value: 'FREE', label: t('shared.subscription.plans.free') },
+    { value: 'BASIC', label: t('shared.subscription.plans.basic') },
+    { value: 'PREMIUM', label: t('shared.subscription.plans.premium') },
+  ]
 
   useEffect(() => {
     if (!categoryLocales.includes(locale)) setLocale(defaultLocale)
@@ -156,6 +164,11 @@ export const PostForm = ({ categories, initialPost }: PostFormProps) => {
           name="categoryId"
           options={categories.map((category) => ({ value: category.id, label: category.name }))}
           placeholder={t('shared.admin.posts.categoryPlaceholder')}
+        />
+        <FormSelect<PostEditorFormValues>
+          name="accessLevel"
+          options={accessLevelOptions}
+          label={t('shared.admin.posts.accessLevel')}
         />
 
         <Tabs

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
-import { getPostsCount, getPostsPage, POSTS_PAGE_SIZE, PostCard } from '@/entities/post'
+import { getPostsCount, getPostsPage, POSTS_PAGE_SIZE, type Post, PostCard } from '@/entities/post'
 import { Pagination } from '@/shared/ui/pagination'
 import { Breadcrumbs } from '@/widgets/breadcrumbs'
 import { buildBreadcrumbs } from '../lib/build-breadcrumbs'
@@ -22,6 +22,11 @@ export const BlogPage = async (props: BlogPageProps) => {
   if (!Number.isInteger(page) || page < 1 || page > totalPages) notFound()
 
   const posts = await getPostsPage(page, locale, filter)
+  const accessLevelLabels: Record<Post['accessLevel'], string> = {
+    FREE: t('shared.subscription.plans.free'),
+    BASIC: t('shared.subscription.badges.basic'),
+    PREMIUM: t('shared.subscription.badges.premium'),
+  }
 
   const breadcrumbs = buildBreadcrumbs({
     params,
@@ -37,7 +42,7 @@ export const BlogPage = async (props: BlogPageProps) => {
       <h1 className="text-2xl font-bold">{title}</h1>
       <div className="grid grid-cols-1 gap-4 t:grid-cols-2 d:grid-cols-3">
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post} accessLevelLabel={accessLevelLabels[post.accessLevel]} />
         ))}
       </div>
       <Pagination

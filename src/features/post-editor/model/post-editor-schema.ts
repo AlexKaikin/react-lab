@@ -1,3 +1,4 @@
+import { POST_ACCESS_LEVEL } from '@prisma/client'
 import { z } from 'zod'
 import { defaultLocale, type Locale, locales } from '@/shared/lib/i18n'
 
@@ -47,6 +48,7 @@ export const postEditorSchema = z
       .min(1, { error: 'shared.admin.posts.validation.slugRequired' })
       .regex(/^[a-z0-9-]+$/, { error: 'shared.admin.posts.validation.slugInvalid' }),
     categoryId: z.string().min(1, { error: 'shared.admin.posts.validation.categoryRequired' }),
+    accessLevel: z.enum(POST_ACCESS_LEVEL),
     ...localeShape,
   })
   .superRefine((data, ctx) => {

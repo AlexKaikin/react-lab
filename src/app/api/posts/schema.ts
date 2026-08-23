@@ -1,3 +1,4 @@
+import { POST_ACCESS_LEVEL } from '@prisma/client'
 import { z } from 'zod'
 import { defaultLocale, type Locale, locales } from '@/shared/lib/i18n'
 
@@ -29,6 +30,7 @@ export const createPostApiSchema = z.object({
     .min(1)
     .regex(/^[a-z0-9-]+$/),
   categoryId: z.string().min(1),
+  accessLevel: z.enum(POST_ACCESS_LEVEL).default('FREE'),
   ...localeShape,
 })
 

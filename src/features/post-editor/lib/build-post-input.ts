@@ -25,6 +25,7 @@ export const buildPostInput = (values: PostEditorFormValues): PostAdminInput => 
   return {
     slug: values.slug,
     categoryId: values.categoryId,
+    accessLevel: values.accessLevel,
     ru: toLocaleInput(values[defaultLocale]),
     ...translations,
   } as PostAdminInput

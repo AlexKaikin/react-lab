@@ -3,12 +3,19 @@ enum Locale {
     en
 }
 
+enum POST_ACCESS_LEVEL {
+    FREE
+    BASIC
+    PREMIUM
+}
+
 model Post {
     id        String   @id @default(uuid())
     slug      String   @unique
     title     String
     content   String
     isActive  Boolean  @default(true)
+    accessLevel POST_ACCESS_LEVEL @default(FREE)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     tags      String[] @default([])

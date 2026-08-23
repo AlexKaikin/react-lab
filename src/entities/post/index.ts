@@ -10,8 +10,18 @@ export {
   updatePost,
 } from './api/post-admin-repository'
 export type { PostsFilter } from './api/post-repository'
-export { getPost, getPosts, getPostsCount, getPostsPage, getTags, getTopTags, searchPosts } from './api/post-repository'
+export {
+  getPost,
+  getPostContent,
+  getPosts,
+  getPostsCount,
+  getPostsPage,
+  getTags,
+  getTopTags,
+  searchPosts,
+} from './api/post-repository'
 export { POSTS_PAGE_SIZE } from './model/constants'
 export type { Post } from './model/types'
 export { PostCard } from './ui/post-card'
+export { PostContent } from './ui/post-content'
 export { PostDetails } from './ui/post-details'

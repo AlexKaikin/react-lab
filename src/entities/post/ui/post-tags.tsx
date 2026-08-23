@@ -13,7 +13,7 @@ export const PostTags = ({ tags }: PostTagsProps) => {
   const hiddenCount = tags.length - visibleTags.length
 
   return (
-    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
+    <div className="scrollbar flex flex-nowrap items-center gap-2 overflow-x-auto">
       {visibleTags.map((tag) => (
         <Tag key={tag} color="primary">
           {tag}

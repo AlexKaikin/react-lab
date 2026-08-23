@@ -1,3 +1,4 @@
+import type { POST_ACCESS_LEVEL } from '@prisma/client'
 import { db } from '@/shared/api/db'
 
 export type PostLocaleInput = {
@@ -10,6 +11,7 @@ export type PostLocaleInput = {
 export type PostAdminInput = {
   slug: string
   categoryId: string
+  accessLevel: POST_ACCESS_LEVEL
   ru: PostLocaleInput
   en: PostLocaleInput | null
 }
@@ -34,6 +36,7 @@ export const getPostsForAdmin = async () => {
     category: { name: post.category.name },
     createdAt: post.createdAt,
     isActive: post.isActive,
+    accessLevel: post.accessLevel,
     hasTranslation: post.translations.some((translation) => translation.locale === 'en'),
   }))
 }
@@ -52,6 +55,7 @@ export const getPostForAdmin = async (slug: string) => {
     id: post.id,
     slug: post.slug,
     categoryId: post.categoryId,
+    accessLevel: post.accessLevel,
     isActive: post.isActive,
     ru: {
       title: post.title,
@@ -80,6 +84,7 @@ export const createPost = (input: PostAdminInput) =>
       slug: input.slug,
       title: input.ru.title,
       content: input.ru.content,
+      accessLevel: input.accessLevel,
       tags: input.ru.tags,
       meta: { create: input.ru.meta },
       category: { connect: { id: input.categoryId } },
@@ -111,6 +116,7 @@ export const updatePost = (id: string, input: PostAdminInput) =>
         slug: input.slug,
         title: input.ru.title,
         content: input.ru.content,
+        accessLevel: input.accessLevel,
         tags: input.ru.tags,
         category: { connect: { id: input.categoryId } },
         meta: { update: input.ru.meta },

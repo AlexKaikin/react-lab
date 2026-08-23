@@ -100,6 +100,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
     "category": { "name": "Внутреннее устройство React" },
     "createdAt": "2026-08-13T16:47:00.180Z",
     "isActive": true,
+    "accessLevel": "FREE",
     "hasTranslation": true
   }
 ]
@@ -119,6 +120,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
   "slug": "kak-rabotaet-useeffect-pod-kapotom",
   "categoryId": "1edcf279-25e6-4a8c-9af3-cd23a1178f2a",
   "isActive": true,
+  "accessLevel": "FREE",
   "ru": {
     "title": "Как работает useEffect под капотом",
     "content": "...markdown, без своего заголовка 1 уровня...",
@@ -141,6 +143,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
 {
   "slug": "kak-rabotaet-useeffect-pod-kapotom",
   "categoryId": "1edcf279-25e6-4a8c-9af3-cd23a1178f2a",
+  "accessLevel": "BASIC",
   "ru": {
     "title": "Как работает useEffect под капотом",
     "content": "Вводный абзац.\n\n## Подзаголовок\n\nМаркдаун-текст поста.",
@@ -164,6 +167,7 @@ Authorization: Bearer <CONTENT_API_SECRET>
 | -------------------- | ---------------- | ----------- | -------------------------------------------------- |
 | `slug`                | `string`         | да          | `^[a-z0-9-]+$`, должен быть уникален                |
 | `categoryId`          | `string`         | да          | id существующей категории                           |
+| `accessLevel`         | `FREE \| BASIC \| PREMIUM` | нет | уровень доступа к полному тексту, по умолчанию `FREE` |
 | `ru.title`            | `string`         | да          | непустая строка                                     |
 | `ru.content`          | `string`         | да          | markdown, непустая строка. **Не добавляйте заголовок 1 уровня (`# ...`)** — заголовок `<h1>` страница уже строит из `title`, свой `#` в контенте даст дублирующийся заголовок. Начинайте структуру контента с `##` и ниже |
 | `ru.tags`             | `string[]`       | нет         | по умолчанию `[]`                                    |

@@ -24,6 +24,26 @@
       "page": "Page {page}"
     }
   },
+  "subscription": {
+    "plans": {
+      "free": "Free",
+      "basic": "Basic",
+      "premium": "Premium"
+    },
+    "badges": {
+      "basic": "Subscriber",
+      "premium": "Premium"
+    },
+    "paywall": {
+      "title": "This article is available with the {plan} plan",
+      "action": "Choose a subscription"
+    },
+    "pricing": {
+      "title": "Subscription",
+      "description": "Choose your access level for React Lab materials.",
+      "comingSoon": "Subscriptions will be available soon."
+    }
+  },
   "breadcrumbs": {
     "label": "Breadcrumb"
   },
@@ -287,6 +307,7 @@
       "tabsLabel": "Content language",
       "slugPlaceholder": "URL (slug)",
       "categoryPlaceholder": "Select a category",
+      "accessLevel": "Access level",
       "titlePlaceholder": "Title",
       "tagsPlaceholder": "Tags, comma-separated",
       "seoSection": "SEO",

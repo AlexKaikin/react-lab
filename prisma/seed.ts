@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg'
-import { Locale, type Prisma, PrismaClient, ROLE } from '@prisma/client'
+import { Locale, type Prisma, PrismaClient, ROLE, SUBSCRIPTION_PLAN } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import { env } from '@/shared/lib/env'
 
@@ -37,7 +37,20 @@ async function main() {
     return data
   }
 
-  await Promise.all(users.map((user) => getUserPromise(user)))
+  const createdUsers = await Promise.all(users.map((user) => getUserPromise(user)))
+  const [admin] = createdUsers
+
+  if (admin) {
+    const currentPeriodStart = new Date()
+    const currentPeriodEnd = new Date(currentPeriodStart)
+    currentPeriodEnd.setFullYear(currentPeriodEnd.getFullYear() + 1)
+
+    await prisma.subscription.upsert({
+      where: { userId: admin.id },
+      update: { plan: SUBSCRIPTION_PLAN.PREMIUM, status: 'ACTIVE', currentPeriodStart, currentPeriodEnd },
+      create: { userId: admin.id, plan: SUBSCRIPTION_PLAN.PREMIUM, currentPeriodStart, currentPeriodEnd },
+    })
+  }
 
   const categories = [
     { name: 'Новости', slug: 'news', nameEn: 'News' },
@@ -666,12 +679,13 @@ export async function deletePost(id: string) {
   ].map((post) => ({ ...post, categoryId: categoryId(post.categorySlug) }))
 
   await Promise.all(
-    posts.map((post) =>
+    posts.map((post, index) =>
       prisma.post.create({
         data: {
           slug: post.slug,
           title: post.title,
           content: post.content,
+          accessLevel: index === 0 ? 'BASIC' : index === 1 ? 'PREMIUM' : 'FREE',
           meta: { create: post.meta },
           category: { connect: { id: post.categoryId } },
           tags: post.tags,

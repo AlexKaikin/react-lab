@@ -19,7 +19,13 @@ export const authOptions: NextAuthOptions = {
         const isValid = await verifyPassword(credentials.password, user.password)
         if (!isValid) return null
 
-        return { id: user.id, email: user.email, firstName: user.firstName, roles: user.roles, isActive: user.isActive }
+        return {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          roles: user.roles,
+          isActive: user.isActive,
+        }
       },
     }),
   ],

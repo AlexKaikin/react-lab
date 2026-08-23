@@ -24,6 +24,26 @@
       "page": "Страница {page}"
     }
   },
+  "subscription": {
+    "plans": {
+      "free": "Бесплатный",
+      "basic": "Базовый",
+      "premium": "Премиум"
+    },
+    "badges": {
+      "basic": "По подписке",
+      "premium": "Премиум"
+    },
+    "paywall": {
+      "title": "Материал доступен по тарифу {plan}",
+      "action": "Выбрать подписку"
+    },
+    "pricing": {
+      "title": "Подписка",
+      "description": "Выберите уровень доступа к материалам React Lab.",
+      "comingSoon": "Оформление подписки скоро появится."
+    }
+  },
   "breadcrumbs": {
     "label": "Хлебные крошки"
   },
@@ -287,6 +307,7 @@
       "tabsLabel": "Язык контента",
       "slugPlaceholder": "URL (slug)",
       "categoryPlaceholder": "Выберите категорию",
+      "accessLevel": "Уровень доступа",
       "titlePlaceholder": "Заголовок",
       "tagsPlaceholder": "Теги через запятую",
       "seoSection": "SEO",

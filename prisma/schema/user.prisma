@@ -23,4 +23,6 @@ model User {
     updatedAt         DateTime  @default(now()) @updatedAt
 
     roles ROLE[] @default([])
+
+    subscription Subscription?
 }

@@ -15,10 +15,13 @@ export type Post = {
   id: string
   slug: string
   title: string
-  content: string
+  content?: string
+  accessLevel: POST_ACCESS_LEVEL
   createdAt: Date
   updatedAt: Date
   tags: string[]
   category: PostCategory
   meta: PostMeta
 }
+
+import type { POST_ACCESS_LEVEL } from '@prisma/client'

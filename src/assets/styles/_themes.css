@@ -141,6 +141,8 @@
     background-color: var(--bg-primary);
     border: 1px solid var(--border-secondary);
     border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
   }
 
   .animate-fade-in {

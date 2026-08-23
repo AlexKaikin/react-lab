@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
   const post = await createPost({
     slug: parsed.data.slug,
     categoryId: parsed.data.categoryId,
+    accessLevel: parsed.data.accessLevel,
     ru: parsed.data[defaultLocale],
     ...translations,
   } as PostAdminInput)

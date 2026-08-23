@@ -41,7 +41,12 @@ export const NavItem = ({ label, href, children }: NavItemProps) => {
             onClick={toggle}
             aria-expanded={isExpanded}
           >
-            <Icon name="ChevronDown" className={classNames('transition-transform', isExpanded && 'rotate-180')} />
+            <Icon
+              name="ChevronDown"
+              width={16}
+              height={16}
+              className={classNames('transition-transform', isExpanded && 'rotate-180')}
+            />
           </Button>
         )}
       </div>

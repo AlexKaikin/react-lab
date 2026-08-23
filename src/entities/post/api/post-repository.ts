@@ -2,6 +2,7 @@ import type { Prisma } from '@prisma/client'
 import { db } from '@/shared/api/db'
 import { defaultLocale, type Locale } from '@/shared/lib/i18n'
 import { POSTS_PAGE_SIZE } from '../model/constants'
+import type { Post } from '../model/types'
 
 export type PostsFilter = { categorySlug: string } | { tag: string }
 
@@ -13,14 +14,16 @@ const postInclude = (locale: Locale) => ({
 
 type RawPost = Prisma.PostGetPayload<{ include: ReturnType<typeof postInclude> }>
 
-const resolvePost = (post: RawPost) => {
+const resolvePost = (post: RawPost): Post => {
   const translation = post.translations[0]
+  const content = translation?.content ?? post.content
 
   return {
     id: post.id,
     slug: post.slug,
     title: translation?.title ?? post.title,
-    content: translation?.content ?? post.content,
+    ...(post.accessLevel === 'FREE' && { content }),
+    accessLevel: post.accessLevel,
     tags: translation?.tags ?? post.tags,
     createdAt: post.createdAt,
     updatedAt: post.updatedAt,
@@ -31,6 +34,15 @@ const resolvePost = (post: RawPost) => {
       name: post.category.translations[0]?.name ?? post.category.name,
     },
   }
+}
+
+const getAvailablePost = async (slug: string, locale: Locale) => {
+  const post = await db.post.findUnique({ where: { slug }, include: postInclude(locale) })
+
+  if (!post || !post.isActive) return null
+  if (locale !== defaultLocale && post.translations.length === 0) return null
+
+  return post
 }
 
 const toWhere = (locale: Locale, filter?: PostsFilter): Prisma.PostWhereInput => {
@@ -73,12 +85,19 @@ export const getPostsPage = async (page: number, locale: Locale, filter?: PostsF
 export const getPostsCount = (locale: Locale, filter?: PostsFilter) => db.post.count({ where: toWhere(locale, filter) })
 
 export const getPost = async (slug: string, locale: Locale) => {
-  const post = await db.post.findUnique({ where: { slug }, include: postInclude(locale) })
+  const post = await getAvailablePost(slug, locale)
 
-  if (!post || !post.isActive) return null
-  if (locale !== defaultLocale && post.translations.length === 0) return null
+  if (!post) return null
 
   return resolvePost(post)
+}
+
+export const getPostContent = async (slug: string, locale: Locale) => {
+  const post = await getAvailablePost(slug, locale)
+
+  if (!post) return null
+
+  return post.translations[0]?.content ?? post.content
 }
 
 const getTagLists = async (locale: Locale) => {
