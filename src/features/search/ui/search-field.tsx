@@ -27,7 +27,7 @@ export const SearchField = ({ className }: SearchFieldProps) => {
   const { results, isLoading } = useSearch(query)
   const isPanelVisible = isOpen && (isLoading || results !== null)
 
-  useScrollLock(isOpen)
+  useScrollLock(isPanelVisible)
 
   useEffect(() => {
     setActiveSlug(results?.[0]?.slug)

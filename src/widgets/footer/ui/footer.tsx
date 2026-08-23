@@ -78,6 +78,9 @@ export const Footer: FC<FooterProps> = async ({ className, locale }) => {
               <LinkButton href="/privacy" variant="text" color="secondary">
                 {t('shared.legal.privacy.label')}
               </LinkButton>
+              <LinkButton href="/cookies" variant="text" color="secondary">
+                {t('shared.legal.cookies.label')}
+              </LinkButton>
             </nav>
           </div>
         </div>

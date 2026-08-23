@@ -43,7 +43,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({ categories }) => {
     >
       <div className="flex flex-col gap-1">
         <Divider textAlign="left" className="mb-1">
-          {t('shared.menu.label')}
+          <span className="text-xs">{t('shared.menu.label')}</span>
         </Divider>
 
         <NavItem label={t('shared.menu.home')} href="/" />
@@ -55,7 +55,7 @@ export const MenuModal: React.FC<MenuModalProps> = ({ categories }) => {
         </NavItem>
 
         <Divider textAlign="left" className="mt-6 mb-1">
-          {t('shared.menu.settings')}
+          <span className="text-xs">{t('shared.menu.settings')}</span>
         </Divider>
 
         <NavItem label={t('shared.languageToggle.change')}>

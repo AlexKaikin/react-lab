@@ -42,7 +42,11 @@ export const SearchResults = ({
     listboxId ? { id: optionId(listboxId, slug), role: 'option' as const, 'aria-selected': slug === activeSlug } : {}
 
   return (
-    <ul {...listProps} data-lenis-prevent className={classNames('flex flex-col gap-1 overflow-y-auto', className)}>
+    <ul
+      {...listProps}
+      data-lenis-prevent
+      className={classNames('scrollbar flex flex-col gap-1 overflow-y-auto', className)}
+    >
       {isLoading &&
         SKELETON_ROWS.map((row) => (
           <li key={row} className="flex flex-col gap-1 p-2">

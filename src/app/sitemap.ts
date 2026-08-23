@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...buildEntry('', locales),
     ...buildEntry('/blog', locales),
+    ...['/terms', '/privacy', '/cookies'].flatMap((path) => buildEntry(path, locales)),
     ...categories.flatMap((category) => buildEntry(`/blog/category/${category.slug}`, locales)),
     ...[...postsBySlug.entries()].flatMap(([slug, post]) => buildEntry(`/blog/${slug}`, post.locales, post.updatedAt)),
   ]

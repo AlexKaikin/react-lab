@@ -43,7 +43,7 @@ export const Modal: FC<ModalProps> = (props) => {
           aria-modal="true"
           tabIndex={-1}
           className={classNames(
-            'paper relative m-2 max-h-[calc(100vh-1rem)] overflow-y-auto',
+            'paper scrollbar relative m-2 max-h-[calc(100vh-1rem)] overflow-y-auto',
             animationClassName,
             className,
           )}

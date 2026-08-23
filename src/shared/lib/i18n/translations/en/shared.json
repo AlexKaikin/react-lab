@@ -188,6 +188,40 @@
           "body": "For questions about how we handle personal data, please reach out through the contact form on the website."
         }
       ]
+    },
+    "cookies": {
+      "label": "Cookie Policy",
+      "updated": "Last updated: August 23, 2026",
+      "sections": [
+        {
+          "heading": "1. What cookies are",
+          "body": "Cookies are small files that a browser stores on your device when you visit a website. They help operate the website, remember settings, and understand how the Service is used."
+        },
+        {
+          "heading": "2. Strictly necessary cookies",
+          "body": "We use technically necessary cookies to operate authentication and protect forms: session cookies, CSRF protection cookies, and cookies that store the return URL after sign-in. Some Service features may not work correctly without them."
+        },
+        {
+          "heading": "3. Preferences",
+          "body": "Your theme preference is stored in the browser's local storage (localStorage), not in a cookie. This lets us retain your chosen appearance on later visits."
+        },
+        {
+          "heading": "4. Analytics and advertising",
+          "body": "We may add analytics, advertising, and other non-essential cookies to measure audiences, improve the Service, and show relevant content. Before enabling these technologies, we will implement the required consent mechanism and list their providers, purposes, and retention periods in this Policy."
+        },
+        {
+          "heading": "5. Third-party technologies",
+          "body": "When third-party analytics or advertising services are enabled, their providers may set cookies. We will update this page with those services and links to their privacy policies."
+        },
+        {
+          "heading": "6. Managing cookies",
+          "body": "You can delete and block cookies in your browser settings. Blocking strictly necessary cookies may limit access to authentication and other Service features. You will be able to change non-essential cookie settings through the consent mechanism once it is available on the website."
+        },
+        {
+          "heading": "7. Changes to this Policy",
+          "body": "We may update this Policy when the technologies we use change. The current version is always available on this page."
+        }
+      ]
     }
   },
   "account": {
