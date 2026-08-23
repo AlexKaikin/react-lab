@@ -1,6 +1,14 @@
 'use client'
 
-import { type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import {
+  type KeyboardEvent as ReactKeyboardEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import { createPortal } from 'react-dom'
 import { classNames } from '@/shared/lib/class-names'
 import { useAnimation } from '@/shared/ui/animation'
@@ -27,7 +35,9 @@ type DropdownProps = {
 
 type Coords = { top: number; left: number; width?: number }
 
-const GAP = 8
+const GAP = 2
+const FOCUSABLE_SELECTOR =
+  'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
 
 export const Dropdown = ({ trigger, children, panelRole = 'menu', className, matchTriggerWidth }: DropdownProps) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -37,10 +47,18 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
   const panelRef = useRef<HTMLDivElement>(null)
   const { setIsAnimating, animationClassName } = useAnimation('scale')
 
+  const focusTrigger = useCallback(() => {
+    rootRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)?.focus()
+  }, [])
+
   const handleOpen = useCallback(() => {
     isClosingRef.current = false
     setIsMounted(true)
-    requestAnimationFrame(() => setIsAnimating(false))
+
+    requestAnimationFrame(() => {
+      setIsAnimating(false)
+      requestAnimationFrame(() => panelRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)?.focus())
+    })
   }, [setIsAnimating])
 
   const handleClose = useCallback(() => {
@@ -48,6 +66,25 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
     isClosingRef.current = true
     setIsAnimating(true)
   }, [setIsAnimating])
+
+  const handlePanelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Tab') return
+
+    const focusableElements = [...(panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR) ?? [])].filter(
+      (element) => element.tabIndex >= 0 && element.getClientRects().length > 0,
+    )
+    if (focusableElements.length === 0) return
+
+    event.preventDefault()
+
+    const activeIndex = focusableElements.indexOf(document.activeElement as HTMLElement)
+    const nextIndex =
+      activeIndex === -1
+        ? 0
+        : (activeIndex + (event.shiftKey ? -1 : 1) + focusableElements.length) % focusableElements.length
+
+    focusableElements[nextIndex]?.focus()
+  }
 
   const handleTransitionEnd = (e: React.TransitionEvent) => {
     if (e.target === e.currentTarget && isClosingRef.current) {
@@ -106,7 +143,11 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') handleClose()
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        handleClose()
+        focusTrigger()
+      }
     }
 
     document.addEventListener('mousedown', handlePointerDown)
@@ -116,7 +157,7 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
       document.removeEventListener('mousedown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isMounted, handleClose])
+  }, [isMounted, handleClose, focusTrigger])
 
   return (
     <div ref={rootRef} className="relative">
@@ -138,12 +179,12 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
             className="fixed z-modal"
           >
             <div className={animationClassName} onTransitionEnd={handleTransitionEnd}>
-              {/* biome-ignore lint/a11y/useKeyWithClickEvents: закрытие по клику — просто ловит всплытие клика от пунктов меню (кнопок/ссылок), у которых уже есть своя клавиатурная доступность */}
               {/* biome-ignore lint/a11y/noStaticElementInteractions: role='menu' задаётся здесь; для 'listbox' роль живёт на реальном интерактивном списке внутри children (иначе получится listbox в listbox) */}
               <div
                 role={panelRole === 'menu' ? 'menu' : undefined}
                 className={classNames('paper flex min-w-48 flex-col gap-1 p-3', className)}
                 onClick={handleClose}
+                onKeyDown={handlePanelKeyDown}
               >
                 {typeof children === 'function' ? children({ close: handleClose }) : children}
               </div>

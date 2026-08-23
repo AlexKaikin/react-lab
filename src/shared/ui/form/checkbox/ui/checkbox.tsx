@@ -14,7 +14,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ label, cl
     <label htmlFor={fieldId} className={classNames('flex cursor-pointer items-start gap-2 text-sm', className)}>
       <span className="relative mt-0.5 flex size-5 shrink-0 items-center justify-center">
         <input ref={ref} type="checkbox" id={fieldId} className="peer sr-only" {...rest} />
-        <span className="absolute inset-0 rounded-sm border border-secondary bg-primary/20 backdrop-blur-sm transition-colors peer-checked:border-semantic-primary peer-checked:bg-semantic-primary peer-focus-visible:border-semantic-primary peer-focus-visible:ring-2 peer-focus-visible:ring-semantic-primary/30" />
+        <span className="absolute inset-0 rounded-sm border border-secondary bg-primary/20 backdrop-blur-sm transition-colors peer-checked:border-semantic-primary peer-checked:bg-semantic-primary peer-focus-visible:border-semantic-primary peer-focus-visible:ring-2 peer-focus-visible:ring-semantic-primary/30 peer-aria-invalid:border-semantic-error peer-aria-invalid:focus-visible:border-semantic-error peer-aria-invalid:focus-visible:ring-semantic-error/30" />
         <Icon
           name="Check"
           size={14}

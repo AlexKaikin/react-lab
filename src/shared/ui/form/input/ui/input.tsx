@@ -13,7 +13,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     <input
       ref={ref}
       className={classNames(
-        'w-full h-12 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors placeholder:text-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30',
+        'w-full h-12 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors placeholder:text-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30 aria-invalid:border-semantic-error aria-invalid:ring-2 aria-invalid:ring-semantic-error/30 aria-invalid:focus:border-semantic-error aria-invalid:focus:ring-semantic-error/30',
         !!startSlot && 'pl-12',
         !!endSlot && 'pr-12',
         className,

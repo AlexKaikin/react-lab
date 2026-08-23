@@ -7,6 +7,7 @@ import type { User } from '@/entities/user'
 import { Button } from '@/shared/ui/button'
 import { Form } from '@/shared/ui/form/form'
 import { FormInput } from '@/shared/ui/form/form-input'
+import { FormTextarea } from '@/shared/ui/form/form-textarea'
 import { useToastStore } from '@/shared/ui/toast'
 import { editProfile } from '../api/profile-edit-action'
 import { type ProfileEditFormValues, profileEditSchema } from '../model/profile-edit-schema'
@@ -48,7 +49,12 @@ export const ProfileEditForm = ({ user }: { user: User }) => {
       <div className="flex flex-col gap-4">
         <FormInput<ProfileEditFormValues> name="firstName" placeholder={t('shared.auth.firstNamePlaceholder')} />
         <FormInput<ProfileEditFormValues> name="lastName" placeholder={t('shared.account.profile.lastName')} />
-        <FormInput<ProfileEditFormValues> name="about" placeholder={t('shared.account.profile.about')} />
+        <FormTextarea<ProfileEditFormValues>
+          autoResize
+          name="about"
+          placeholder={t('shared.account.profile.about')}
+          rows={4}
+        />
         <FormInput<ProfileEditFormValues> name="location" placeholder={t('shared.account.profile.location')} />
         <FormInput<ProfileEditFormValues> name="birthDate" type="date" />
         <FormInput<ProfileEditFormValues> name="avatarUrl" placeholder={t('shared.account.profile.avatarUrl')} />

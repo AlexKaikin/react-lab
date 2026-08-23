@@ -35,6 +35,12 @@ export const Disabled: Story = {
   },
 }
 
+export const Invalid: Story = {
+  args: {
+    'aria-invalid': true,
+  },
+}
+
 export const LongLabel: Story = {
   args: {
     label: 'Я соглашаюсь с условиями использования сервиса и политикой обработки персональных данных',
