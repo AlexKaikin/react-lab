@@ -36,7 +36,10 @@
     },
     "paywall": {
       "title": "This article is available with the {plan} plan",
-      "action": "Choose a subscription"
+      "action": "Choose a subscription",
+      "loading": "Checking access to the article",
+      "error": "Unable to load the article. Please try again.",
+      "retry": "Try again"
     },
     "pricing": {
       "title": "Subscription",
