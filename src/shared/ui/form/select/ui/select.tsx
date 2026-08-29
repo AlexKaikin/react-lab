@@ -124,7 +124,7 @@ export const Select = (props: SelectProps) => {
           aria-invalid={props['aria-invalid']}
           aria-describedby={props['aria-describedby']}
           className={classNames(
-            'flex h-12 w-full items-center justify-between gap-2 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30',
+            'flex h-12 w-full items-center justify-between gap-2 rounded-md border border-secondary bg-primary/20 px-4 text-base text-primary outline-none backdrop-blur-sm transition-colors enabled:hover:bg-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30',
             className,
           )}
           onKeyDown={(e) => {

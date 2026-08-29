@@ -52,9 +52,9 @@ export const Textarea = ({ autoResize = false, className, onChange, ref, value, 
       value={value}
       data-lenis-prevent
       className={classNames(
-        'scrollbar min-h-32 w-full rounded-md border border-secondary bg-primary/20 px-4 py-3 text-base text-primary outline-none backdrop-blur-sm placeholder:text-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30 aria-invalid:border-semantic-error aria-invalid:ring-2 aria-invalid:ring-semantic-error/30 aria-invalid:focus:border-semantic-error aria-invalid:focus:ring-semantic-error/30',
+        'scrollbar min-h-32 w-full rounded-md border border-secondary bg-primary/20 px-4 py-3 text-base text-primary outline-none backdrop-blur-sm placeholder:text-secondary enabled:hover:bg-secondary focus:border-semantic-primary focus:ring-2 focus:ring-semantic-primary/30 aria-invalid:border-semantic-error aria-invalid:ring-2 aria-invalid:ring-semantic-error/30 aria-invalid:focus:border-semantic-error aria-invalid:focus:ring-semantic-error/30',
         autoResize
-          ? 'resize-none transition-[height,border-color,box-shadow] duration-200 ease-out'
+          ? 'resize-none transition-[height,border-color,box-shadow,background-color] duration-200 ease-out'
           : 'resize-y transition-colors',
         className,
       )}

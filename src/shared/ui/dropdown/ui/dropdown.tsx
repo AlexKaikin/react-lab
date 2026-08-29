@@ -182,7 +182,7 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
               {/* biome-ignore lint/a11y/noStaticElementInteractions: role='menu' задаётся здесь; для 'listbox' роль живёт на реальном интерактивном списке внутри children (иначе получится listbox в listbox) */}
               <div
                 role={panelRole === 'menu' ? 'menu' : undefined}
-                className={classNames('paper flex min-w-48 flex-col gap-1 p-3', className)}
+                className={classNames('paper relative flex min-w-48 flex-col gap-1 overflow-hidden p-3', className)}
                 onClick={handleClose}
                 onKeyDown={handlePanelKeyDown}
               >
