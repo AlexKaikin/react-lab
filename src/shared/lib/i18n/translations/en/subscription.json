@@ -1,0 +1,87 @@
+{
+  "plans": {
+    "free": "Free",
+    "basic": "Basic",
+    "premium": "Premium"
+  },
+  "badges": {
+    "basic": "Subscriber",
+    "premium": "Premium"
+  },
+  "paywall": {
+    "title": "This article is available with the {plan} plan",
+    "action": "Choose a subscription",
+    "loading": "Checking access to the article",
+    "error": "Unable to load the article. Please try again.",
+    "retry": "Try again"
+  },
+  "account": {
+    "title": "Subscription",
+    "plans": {
+      "free": "Free plan",
+      "basic": "Basic plan",
+      "premium": "Premium plan"
+    },
+    "statuses": {
+      "active": "Active",
+      "expired": "Expired",
+      "pastDue": "Payment due"
+    },
+    "description": {
+      "free": "Free access to public materials with no time limit.",
+      "paid": "Access to materials is based on your subscription level and status."
+    },
+    "period": {
+      "label": "Available until",
+      "withoutExpiration": "No time limit"
+    },
+    "renewal": {
+      "label": "Renewal",
+      "automatic": "Automatic",
+      "manual": "Manual",
+      "notRequired": "Not required"
+    },
+    "action": "View plans"
+  },
+  "pricing": {
+    "title": "Subscription",
+    "description": "Choose your access level for React Lab materials.",
+    "perMonth": "per month",
+    "featured": "Exclusive",
+    "plans": {
+      "free": {
+        "description": "Explore React Lab and its publicly available materials.",
+        "features": {
+          "publicArticles": "All free articles",
+          "search": "Search across materials",
+          "account": "Personal profile"
+        }
+      },
+      "basic": {
+        "description": "More practical materials for consistent learning.",
+        "features": {
+          "free": "Everything in Free",
+          "subscriberArticles": "Subscriber-only articles",
+          "newMaterials": "New subscriber materials"
+        }
+      },
+      "premium": {
+        "description": "Full access to the deepest and most exclusive guides.",
+        "features": {
+          "basic": "Everything in Basic",
+          "exclusiveArticles": "Exclusive Premium articles",
+          "allMaterials": "All future premium materials"
+        }
+      }
+    },
+    "actions": {
+      "current": "Current plan",
+      "select": "Choose plan",
+      "checking": "Checking the current plan"
+    },
+    "feedback": {
+      "updated": "The {plan} plan is now active",
+      "error": "Unable to change the plan. Please try again."
+    }
+  }
+}

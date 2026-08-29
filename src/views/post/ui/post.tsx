@@ -14,9 +14,9 @@ export const PostPage = async ({ params }: LocalePageProps<'/[locale]/blog/[slug
 
   const { content, ...postDetails } = post
   const accessLevelLabels: Record<Post['accessLevel'], string> = {
-    FREE: t('shared.subscription.plans.free'),
-    BASIC: t('shared.subscription.plans.basic'),
-    PREMIUM: t('shared.subscription.plans.premium'),
+    FREE: t('subscription.plans.free'),
+    BASIC: t('subscription.plans.basic'),
+    PREMIUM: t('subscription.plans.premium'),
   }
 
   const breadcrumbs = [
@@ -50,9 +50,9 @@ export const PostPage = async ({ params }: LocalePageProps<'/[locale]/blog/[slug
             <ProtectedPostContent
               slug={post.slug}
               locale={locale}
-              paywallTitle={t('shared.subscription.paywall.title', { plan: accessLevelLabels[post.accessLevel] })}
+              paywallTitle={t('subscription.paywall.title', { plan: accessLevelLabels[post.accessLevel] })}
               paywallDescription={post.meta.description}
-              paywallActionLabel={t('shared.subscription.paywall.action')}
+              paywallActionLabel={t('subscription.paywall.action')}
             />
           )
         }

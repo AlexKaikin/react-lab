@@ -29,6 +29,9 @@ export const Footer: FC<FooterProps> = async ({ className, locale }) => {
               <LinkButton href="/blog" variant="text" color="secondary">
                 {t('shared.menu.blog')}
               </LinkButton>
+              <LinkButton href="/pricing" variant="text" color="secondary">
+                {t('shared.menu.pricing')}
+              </LinkButton>
             </nav>
           </div>
 

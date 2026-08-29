@@ -1,4 +1,16 @@
-export { getActiveSubscriptionPlan } from './api/subscription-repository'
+export {
+  deleteSubscription,
+  getActiveSubscriptionPlan,
+  getSubscription,
+  upsertSubscription,
+} from './api/subscription-repository'
 export { canAccessPost } from './lib/can-access-post'
-export type { SubscriptionPlan } from './model/types'
+export { getNextSubscriptionPeriodEnd } from './lib/get-next-subscription-period-end'
+export type {
+  CurrentSubscriptionResponse,
+  Subscription,
+  SubscriptionDto,
+  SubscriptionPlan,
+  SubscriptionStatus,
+} from './model/types'
 export { SubscriptionPaywall } from './ui/subscription-paywall'

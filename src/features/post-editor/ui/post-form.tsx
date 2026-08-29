@@ -126,9 +126,9 @@ export const PostForm = ({ categories, initialPost }: PostFormProps) => {
   ]
   const visibleLocales = orderedLocales.filter((loc) => categoryLocales.includes(loc))
   const accessLevelOptions = [
-    { value: 'FREE', label: t('shared.subscription.plans.free') },
-    { value: 'BASIC', label: t('shared.subscription.plans.basic') },
-    { value: 'PREMIUM', label: t('shared.subscription.plans.premium') },
+    { value: 'FREE', label: t('subscription.plans.free') },
+    { value: 'BASIC', label: t('subscription.plans.basic') },
+    { value: 'PREMIUM', label: t('subscription.plans.premium') },
   ]
 
   useEffect(() => {

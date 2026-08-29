@@ -24,7 +24,7 @@ export async function editProfile(values: unknown) {
     avatarUrl: avatarUrl || null,
   })
 
-  revalidatePath('/account')
+  revalidatePath('/[locale]/account/profile', 'page')
 
   return { success: true as const }
 }

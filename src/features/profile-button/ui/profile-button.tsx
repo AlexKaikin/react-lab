@@ -2,8 +2,8 @@
 
 import { signOut, useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
-import { lazy, useEffect, useState } from 'react'
-import type { SubscriptionPlan } from '@/entities/subscription'
+import { lazy } from 'react'
+import { useCurrentSubscription } from '@/entities/subscription/model'
 import { Button, LinkButton } from '@/shared/ui/button'
 import { Divider } from '@/shared/ui/divider'
 import { Dropdown } from '@/shared/ui/dropdown'
@@ -16,31 +16,7 @@ export const ProfileButton = () => {
   const t = useTranslations()
   const { data: session, status } = useSession()
   const { openModal } = useModalStore()
-  const [subscriptionPlan, setSubscriptionPlan] = useState<SubscriptionPlan | null>(null)
-
-  useEffect(() => {
-    if (!session) {
-      setSubscriptionPlan(null)
-      return
-    }
-
-    const abortController = new AbortController()
-
-    const getSubscriptionPlan = async () => {
-      const response = await fetch('/api/subscription/current', { cache: 'no-store', signal: abortController.signal })
-
-      if (!response.ok) return
-
-      const { plan }: { plan: SubscriptionPlan | null } = await response.json()
-      setSubscriptionPlan(plan)
-    }
-
-    void getSubscriptionPlan().catch((error: unknown) => {
-      if (error instanceof DOMException && error.name === 'AbortError') return
-    })
-
-    return () => abortController.abort()
-  }, [session])
+  const { plan: subscriptionPlan } = useCurrentSubscription()
 
   if (status === 'loading') {
     return <div className="size-12 rounded-full bg-secondary animate-pulse -mr-3" aria-hidden="true" />
@@ -68,7 +44,7 @@ export const ProfileButton = () => {
             </div>
             <Divider />
             <LinkButton href="/account" variant="text" color="secondary" className="p-2">
-              {t('shared.account.profile.label')}
+              {t('account.label')}
             </LinkButton>
             {session.user.roles.includes('ADMIN') && (
               <LinkButton href="/admin" variant="text" color="secondary" className="p-2">

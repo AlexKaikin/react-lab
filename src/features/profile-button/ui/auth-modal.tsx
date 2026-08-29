@@ -16,14 +16,19 @@ const MODE_LABEL_KEY = {
   'forgot-password': 'shared.auth.forgotPassword.label',
 } as const
 
-type AuthModalProps = ModalContentProps & {
+export type AuthModalProps = ModalContentProps & {
   initialMode?: Mode
+  onAuthenticated?: () => void
 }
 
-export const AuthModal = ({ initialMode = 'login' }: AuthModalProps) => {
+export const AuthModal = ({ initialMode = 'login', onAuthenticated }: AuthModalProps) => {
   const t = useTranslations()
   const closeModal = useModalStore((state) => state.closeModal)
   const [mode, setMode] = useState<Mode>(initialMode)
+  const handleLoginSuccess = () => {
+    closeModal()
+    onAuthenticated?.()
+  }
 
   return (
     <Modal
@@ -35,7 +40,7 @@ export const AuthModal = ({ initialMode = 'login' }: AuthModalProps) => {
       <div className="flex flex-col gap-6 p-8">
         <h2>{t(MODE_LABEL_KEY[mode])}</h2>
 
-        {mode === 'login' && <LoginForm onSuccess={closeModal} />}
+        {mode === 'login' && <LoginForm onSuccess={handleLoginSuccess} />}
         {mode === 'signup' && <SignupForm onSuccess={() => setMode('login')} />}
         {mode === 'forgot-password' && <ForgotPasswordForm />}
 

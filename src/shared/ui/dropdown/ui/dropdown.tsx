@@ -29,6 +29,7 @@ type DropdownProps = {
   trigger: (props: DropdownTriggerProps) => ReactNode
   children: ReactNode | ((api: DropdownChildrenApi) => ReactNode)
   panelRole?: PanelRole
+  panelLabel?: string
   className?: string
   matchTriggerWidth?: boolean
 }
@@ -39,7 +40,14 @@ const GAP = 2
 const FOCUSABLE_SELECTOR =
   'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
 
-export const Dropdown = ({ trigger, children, panelRole = 'menu', className, matchTriggerWidth }: DropdownProps) => {
+export const Dropdown = ({
+  trigger,
+  children,
+  panelRole = 'menu',
+  panelLabel,
+  className,
+  matchTriggerWidth,
+}: DropdownProps) => {
   const [isMounted, setIsMounted] = useState(false)
   const [coords, setCoords] = useState<Coords | null>(null)
   const isClosingRef = useRef(false)
@@ -159,6 +167,8 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
     }
   }, [isMounted, handleClose, focusTrigger])
 
+  const panelA11yProps = panelRole === 'menu' ? { role: 'menu' as const, 'aria-label': panelLabel } : {}
+
   return (
     <div ref={rootRef} className="relative">
       {trigger({
@@ -181,7 +191,7 @@ export const Dropdown = ({ trigger, children, panelRole = 'menu', className, mat
             <div className={animationClassName} onTransitionEnd={handleTransitionEnd}>
               {/* biome-ignore lint/a11y/noStaticElementInteractions: role='menu' задаётся здесь; для 'listbox' роль живёт на реальном интерактивном списке внутри children (иначе получится listbox в listbox) */}
               <div
-                role={panelRole === 'menu' ? 'menu' : undefined}
+                {...panelA11yProps}
                 className={classNames('paper relative flex min-w-48 flex-col gap-1 overflow-hidden p-3', className)}
                 onClick={handleClose}
                 onKeyDown={handlePanelKeyDown}

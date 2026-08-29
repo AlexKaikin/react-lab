@@ -37,30 +37,30 @@ export const ProfileEditForm = ({ user }: { user: User }) => {
     const result = await editProfile(values)
 
     if (result.error) {
-      addToast({ variant: 'error', message: t('shared.account.profile.invalidData') })
+      addToast({ variant: 'error', message: t('account.profile.invalidData') })
       return
     }
 
-    addToast({ variant: 'success', message: t('shared.account.profile.saved') })
+    addToast({ variant: 'success', message: t('account.profile.saved') })
   })
 
   return (
     <Form form={form} onSubmit={onSubmit}>
       <div className="flex flex-col gap-4">
         <FormInput<ProfileEditFormValues> name="firstName" placeholder={t('shared.auth.firstNamePlaceholder')} />
-        <FormInput<ProfileEditFormValues> name="lastName" placeholder={t('shared.account.profile.lastName')} />
+        <FormInput<ProfileEditFormValues> name="lastName" placeholder={t('account.profile.lastName')} />
         <FormTextarea<ProfileEditFormValues>
           autoResize
           name="about"
-          placeholder={t('shared.account.profile.about')}
+          placeholder={t('account.profile.about')}
           rows={4}
         />
-        <FormInput<ProfileEditFormValues> name="location" placeholder={t('shared.account.profile.location')} />
+        <FormInput<ProfileEditFormValues> name="location" placeholder={t('account.profile.location')} />
         <FormInput<ProfileEditFormValues> name="birthDate" type="date" />
-        <FormInput<ProfileEditFormValues> name="avatarUrl" placeholder={t('shared.account.profile.avatarUrl')} />
+        <FormInput<ProfileEditFormValues> name="avatarUrl" placeholder={t('account.profile.avatarUrl')} />
       </div>
       <Button type="submit" variant="contained" color="primary" loading={isSubmitting} className="mt-4">
-        {t('shared.account.profile.submit')}
+        {t('account.profile.submit')}
       </Button>
     </Form>
   )

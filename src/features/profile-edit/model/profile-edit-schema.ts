@@ -6,7 +6,7 @@ export const profileEditSchema = z.object({
   about: z.string(),
   location: z.string(),
   birthDate: z.string(),
-  avatarUrl: z.union([z.literal(''), z.url({ error: 'shared.account.validation.invalidUrl' })]),
+  avatarUrl: z.union([z.literal(''), z.url({ error: 'shared.validation.invalidUrl' })]),
 })
 
 export type ProfileEditFormValues = z.infer<typeof profileEditSchema>

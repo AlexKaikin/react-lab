@@ -25,17 +25,17 @@ export const ChangePasswordForm = () => {
     const result = await changePassword(values)
 
     if (result.error === 'invalidPassword') {
-      setError('currentPassword', { message: 'shared.account.changePassword.invalidPassword' })
+      setError('currentPassword', { message: 'account.changePassword.invalidPassword' })
       return
     }
 
     if (result.error) {
-      addToast({ variant: 'error', message: t('shared.account.changePassword.invalidData') })
+      addToast({ variant: 'error', message: t('account.changePassword.invalidData') })
       return
     }
 
     reset()
-    addToast({ variant: 'success', message: t('shared.account.changePassword.success') })
+    addToast({ variant: 'success', message: t('account.changePassword.success') })
   })
 
   return (
@@ -44,12 +44,12 @@ export const ChangePasswordForm = () => {
         <FormInput<ChangePasswordFormValues>
           name="currentPassword"
           type="password"
-          placeholder={t('shared.account.changePassword.currentPasswordPlaceholder')}
+          placeholder={t('account.changePassword.currentPasswordPlaceholder')}
         />
         <FormInput<ChangePasswordFormValues>
           name="newPassword"
           type="password"
-          placeholder={t('shared.account.changePassword.newPasswordPlaceholder')}
+          placeholder={t('account.changePassword.newPasswordPlaceholder')}
         />
         <FormInput<ChangePasswordFormValues>
           name="confirmPassword"
@@ -58,7 +58,7 @@ export const ChangePasswordForm = () => {
         />
       </div>
       <Button type="submit" variant="contained" color="primary" loading={isSubmitting} className="mt-4">
-        {t('shared.account.changePassword.submit')}
+        {t('account.changePassword.submit')}
       </Button>
     </Form>
   )

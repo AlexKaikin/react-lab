@@ -23,9 +23,9 @@ export const BlogPage = async (props: BlogPageProps) => {
 
   const posts = await getPostsPage(page, locale, filter)
   const accessLevelLabels: Record<Post['accessLevel'], string> = {
-    FREE: t('shared.subscription.plans.free'),
-    BASIC: t('shared.subscription.badges.basic'),
-    PREMIUM: t('shared.subscription.badges.premium'),
+    FREE: t('subscription.plans.free'),
+    BASIC: t('subscription.badges.basic'),
+    PREMIUM: t('subscription.badges.premium'),
   }
 
   const breadcrumbs = buildBreadcrumbs({

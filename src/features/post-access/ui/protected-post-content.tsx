@@ -33,7 +33,7 @@ export const ProtectedPostContent = ({
   paywallDescription,
   paywallActionLabel,
 }: ProtectedPostContentProps) => {
-  const t = useTranslations('shared.subscription.paywall')
+  const t = useTranslations('subscription.paywall')
   const { data: session, status: sessionStatus } = useSession()
   const [accessState, setAccessState] = useState<AccessState>({ status: 'checking' })
   const abortControllerRef = useRef<AbortController | null>(null)

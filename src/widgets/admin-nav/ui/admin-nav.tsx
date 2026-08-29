@@ -1,8 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { usePathname } from '@/shared/lib/i18n/navigation'
-import { LinkButton } from '@/shared/ui/button'
+import { SectionNav } from '@/shared/ui/section-nav'
 
 const NAV_ITEMS = [
   { href: '/admin', key: 'dashboard' },
@@ -12,19 +11,11 @@ const NAV_ITEMS = [
 
 export const AdminNav = () => {
   const t = useTranslations()
-  const pathname = usePathname()
+  const items = NAV_ITEMS.map((item) => ({
+    ...item,
+    label: t(`shared.admin.nav.${item.key}`),
+    isExact: item.href === '/admin',
+  }))
 
-  return (
-    <nav aria-label={t('shared.admin.label')} className="flex flex-col items-start gap-2">
-      {NAV_ITEMS.map((item) => {
-        const isActive = item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href)
-
-        return (
-          <LinkButton key={item.href} href={item.href} variant="text" color={isActive ? 'primary' : 'secondary'}>
-            {t(`shared.admin.nav.${item.key}`)}
-          </LinkButton>
-        )
-      })}
-    </nav>
-  )
+  return <SectionNav label={t('shared.admin.label')} items={items} />
 }

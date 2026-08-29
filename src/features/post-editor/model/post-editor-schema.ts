@@ -14,7 +14,7 @@ const metaSchema = z.object({
     .string()
     .min(1, { error: 'shared.admin.posts.validation.metaDescriptionRequired' })
     .max(META_DESCRIPTION_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaDescriptionTooLong' }),
-  image: z.union([z.literal(''), z.url({ error: 'shared.account.validation.invalidUrl' })]),
+  image: z.union([z.literal(''), z.url({ error: 'shared.validation.invalidUrl' })]),
 })
 
 const requiredLocaleSchema = z.object({
@@ -33,7 +33,7 @@ const optionalLocaleSchema = z.object({
     description: z
       .string()
       .max(META_DESCRIPTION_MAX_LENGTH, { error: 'shared.admin.posts.validation.metaDescriptionTooLong' }),
-    image: z.union([z.literal(''), z.url({ error: 'shared.account.validation.invalidUrl' })]),
+    image: z.union([z.literal(''), z.url({ error: 'shared.validation.invalidUrl' })]),
   }),
 })
 

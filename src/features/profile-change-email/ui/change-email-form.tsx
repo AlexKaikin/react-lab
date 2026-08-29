@@ -30,17 +30,17 @@ export const ChangeEmailForm = () => {
     }
 
     if (result.error === 'invalidPassword') {
-      setError('currentPassword', { message: 'shared.account.changeEmail.invalidPassword' })
+      setError('currentPassword', { message: 'account.changeEmail.invalidPassword' })
       return
     }
 
     if (result.error) {
-      addToast({ variant: 'error', message: t('shared.account.changeEmail.invalidData') })
+      addToast({ variant: 'error', message: t('account.changeEmail.invalidData') })
       return
     }
 
     reset()
-    addToast({ variant: 'success', message: t('shared.account.changeEmail.success') })
+    addToast({ variant: 'success', message: t('account.changeEmail.success') })
   })
 
   return (
@@ -50,11 +50,11 @@ export const ChangeEmailForm = () => {
         <FormInput<ChangeEmailFormValues>
           name="currentPassword"
           type="password"
-          placeholder={t('shared.account.changeEmail.currentPasswordPlaceholder')}
+          placeholder={t('account.changeEmail.currentPasswordPlaceholder')}
         />
       </div>
       <Button type="submit" variant="contained" color="primary" loading={isSubmitting} className="mt-4">
-        {t('shared.account.changeEmail.submit')}
+        {t('account.changeEmail.submit')}
       </Button>
     </Form>
   )

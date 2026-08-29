@@ -24,29 +24,6 @@
       "page": "Page {page}"
     }
   },
-  "subscription": {
-    "plans": {
-      "free": "Free",
-      "basic": "Basic",
-      "premium": "Premium"
-    },
-    "badges": {
-      "basic": "Subscriber",
-      "premium": "Premium"
-    },
-    "paywall": {
-      "title": "This article is available with the {plan} plan",
-      "action": "Choose a subscription",
-      "loading": "Checking access to the article",
-      "error": "Unable to load the article. Please try again.",
-      "retry": "Try again"
-    },
-    "pricing": {
-      "title": "Subscription",
-      "description": "Choose your access level for React Lab materials.",
-      "comingSoon": "Subscriptions will be available soon."
-    }
-  },
   "breadcrumbs": {
     "label": "Breadcrumb"
   },
@@ -65,6 +42,7 @@
     "label": "Menu",
     "home": "Home",
     "blog": "Blog",
+    "pricing": "Pricing",
     "settings": "Settings"
   },
   "confirm": {
@@ -81,6 +59,9 @@
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",
     "retry": "Retry"
+  },
+  "validation": {
+    "invalidUrl": "Invalid URL"
   },
   "auth": {
     "login": {
@@ -245,38 +226,6 @@
           "body": "We may update this Policy when the technologies we use change. The current version is always available on this page."
         }
       ]
-    }
-  },
-  "account": {
-    "profile": {
-      "label": "Profile",
-      "lastName": "Last name",
-      "about": "About",
-      "location": "Location",
-      "avatarUrl": "Avatar URL",
-      "submit": "Save",
-      "saved": "Saved",
-      "invalidData": "Please check the form for errors"
-    },
-    "changeEmail": {
-      "label": "Change email",
-      "currentPasswordPlaceholder": "Current password",
-      "submit": "Change email",
-      "success": "Email changed",
-      "invalidPassword": "Incorrect password",
-      "invalidData": "Please check the form for errors"
-    },
-    "changePassword": {
-      "label": "Change password",
-      "currentPasswordPlaceholder": "Current password",
-      "newPasswordPlaceholder": "New password",
-      "submit": "Change password",
-      "success": "Password changed",
-      "invalidPassword": "Incorrect password",
-      "invalidData": "Please check the form for errors"
-    },
-    "validation": {
-      "invalidUrl": "Invalid URL"
     }
   },
   "admin": {

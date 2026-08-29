@@ -1,0 +1,39 @@
+{
+  "label": "Аккаунт",
+  "nav": {
+    "label": "Разделы аккаунта",
+    "profile": "Профиль",
+    "subscription": "Подписка",
+    "settings": "Настройки"
+  },
+  "profile": {
+    "label": "Профиль",
+    "lastName": "Фамилия",
+    "about": "О себе",
+    "location": "Локация",
+    "avatarUrl": "Ссылка на аватар",
+    "submit": "Сохранить",
+    "saved": "Сохранено",
+    "invalidData": "Проверьте правильность заполнения формы"
+  },
+  "settings": {
+    "label": "Настройки"
+  },
+  "changeEmail": {
+    "label": "Смена email",
+    "currentPasswordPlaceholder": "Текущий пароль",
+    "submit": "Сменить email",
+    "success": "Email изменён",
+    "invalidPassword": "Неверный пароль",
+    "invalidData": "Проверьте правильность заполнения формы"
+  },
+  "changePassword": {
+    "label": "Смена пароля",
+    "currentPasswordPlaceholder": "Текущий пароль",
+    "newPasswordPlaceholder": "Новый пароль",
+    "submit": "Сменить пароль",
+    "success": "Пароль изменён",
+    "invalidPassword": "Неверный пароль",
+    "invalidData": "Проверьте правильность заполнения формы"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "label": "Account",
+  "nav": {
+    "label": "Account sections",
+    "profile": "Profile",
+    "subscription": "Subscription",
+    "settings": "Settings"
+  },
+  "profile": {
+    "label": "Profile",
+    "lastName": "Last name",
+    "about": "About",
+    "location": "Location",
+    "avatarUrl": "Avatar URL",
+    "submit": "Save",
+    "saved": "Saved",
+    "invalidData": "Please check the form for errors"
+  },
+  "settings": {
+    "label": "Settings"
+  },
+  "changeEmail": {
+    "label": "Change email",
+    "currentPasswordPlaceholder": "Current password",
+    "submit": "Change email",
+    "success": "Email changed",
+    "invalidPassword": "Incorrect password",
+    "invalidData": "Please check the form for errors"
+  },
+  "changePassword": {
+    "label": "Change password",
+    "currentPasswordPlaceholder": "Current password",
+    "newPasswordPlaceholder": "New password",
+    "submit": "Change password",
+    "success": "Password changed",
+    "invalidPassword": "Incorrect password",
+    "invalidData": "Please check the form for errors"
+  }
+}

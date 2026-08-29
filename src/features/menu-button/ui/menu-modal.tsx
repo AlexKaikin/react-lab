@@ -54,6 +54,8 @@ export const MenuModal: React.FC<MenuModalProps> = ({ categories }) => {
           ))}
         </NavItem>
 
+        <NavItem label={t('shared.menu.pricing')} href="/pricing" />
+
         <Divider textAlign="left" className="mt-6 mb-1">
           <span className="text-xs">{t('shared.menu.settings')}</span>
         </Divider>
